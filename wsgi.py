@@ -6,10 +6,10 @@ from db_connector.sqlite3_db import SQLite3DB
 from products.mattress import Mattress
 from settings import sqlite3_db_file_path
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 
-@app.route('/')
+@application.route('/')
 def hello_world():
     return 'Hello World!'
 
@@ -22,14 +22,14 @@ def get_db_handle():
     return db
 
 
-@app.teardown_appcontext
+@application.teardown_appcontext
 def close_db_handle_connection(exception):
     db_handle = getattr(g, '_database', None)
     if db_handle is not None:
         db_handle.disconnect()
 
 
-@app.route('/api/mattress/<model>', methods=['GET'])
+@application.route('/api/mattress/<model>', methods=['GET'])
 def get_mattress_price(model):
     width = request.args.get('width')
     length = request.args.get('length')
@@ -40,4 +40,4 @@ def get_mattress_price(model):
 
 
 if __name__ == '__main__':
-    app.run()
+    application.run()
