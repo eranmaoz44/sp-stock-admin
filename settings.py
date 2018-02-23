@@ -1,1 +1,1 @@
-sqlite3_db_file_path = 'C:\\Code\\sp-stock-admin\\db\\products'
+sqlite3_db_file_path = 'db/products'
