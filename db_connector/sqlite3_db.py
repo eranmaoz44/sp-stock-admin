@@ -1,6 +1,6 @@
 import sqlite3
 
-from db_connector import DBConnector
+from db_connector.db_connector import DBConnector
 
 
 class SQLite3DB(DBConnector):

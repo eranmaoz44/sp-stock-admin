@@ -50,7 +50,6 @@ def set_mattress_price(model):
     length = request.args.get('length')
 
     price = request.get_json()['price']
-
     mattress = Mattress(model)
 
     mattress.set_price([width, length], price, get_db_handle())

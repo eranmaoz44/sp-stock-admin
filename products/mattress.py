@@ -1,4 +1,4 @@
-from product import Product
+from products.product import Product
 
 
 class Mattress(Product):
