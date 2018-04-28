@@ -11,7 +11,7 @@ class SQLite3DB(DBConnector):
     def connect(self):
         self.db = sqlite3.connect(self.path_to_sqllite3_db_file)
 
-    def query(self, query, args=[], only_first_result_needed=False):
+    def query_select(self, query, args=[], only_first_result_needed=False):
         query_handle = self.db.execute(query, args)
         results = query_handle.fetchall()
         query_handle.close()
@@ -25,6 +25,14 @@ class SQLite3DB(DBConnector):
             return_value = None
 
         return return_value
+
+    def query_insert_or_update(self, query, args=[]):
+        db_cursor = self.db.cursor()
+        db_cursor.execute(query, args)
+        rows_successfully_updated = db_cursor.rowcount
+        self.db.commit()
+        db_cursor.close()
+        return rows_successfully_updated
 
     def disconnect(self):
         self.db.close()

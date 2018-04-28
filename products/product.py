@@ -12,7 +12,8 @@ class Product(object):
         pass
 
     @abstractmethod
-    def set_price(self, specification=()):
+    def set_price(self, specification, price, db_handle):
         pass
+
 
 

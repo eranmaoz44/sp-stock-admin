@@ -16,5 +16,9 @@ class DBConnector(object):
         pass
 
     @abstractmethod
-    def query(self, query, args=[], only_first_result=False):
+    def query_select(self, query, args=[], only_first_result=False):
+        pass
+
+    @abstractmethod
+    def query_insert_or_update(self, query, args=[]):
         pass

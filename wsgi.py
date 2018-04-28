@@ -1,12 +1,15 @@
 from flask import Flask
 from flask import g
 from flask import request
+from flask import Response
+from flask_cors import CORS
 
 from db_connector.sqlite3_db import SQLite3DB
 from products.mattress import Mattress
 from settings import sqlite3_db_file_path
 
 application = Flask(__name__)
+cors = CORS(application, resources={r"/api/*": {"origins": "*"}})
 
 
 @application.route('/')
@@ -36,7 +39,23 @@ def get_mattress_price(model):
 
     mattress = Mattress(model)
 
-    return str(mattress.get_price([width, length], get_db_handle()))
+    price = mattress.get_price([width, length], get_db_handle())
+
+    return Response(status=200, response=str(price))
+
+
+@application.route('/api/mattress/<model>', methods=['POST'])
+def set_mattress_price(model):
+    width = request.args.get('width')
+    length = request.args.get('length')
+
+    price = request.get_json()['price']
+
+    mattress = Mattress(model)
+
+    mattress.set_price([width, length], price, get_db_handle())
+
+    return Response(status=200)
 
 
 if __name__ == '__main__':
