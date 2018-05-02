@@ -23,7 +23,7 @@
     restrict: 'E',
     transclude: true,
     scope: { },
-    templateUrl: 'tabset.html',
+    templateUrl: '/static/tabset.html',
     bindToController: true,
     controllerAs: 'tabset',
     controller: function() {

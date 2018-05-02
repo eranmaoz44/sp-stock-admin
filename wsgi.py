@@ -1,3 +1,5 @@
+import os
+import flask
 from flask import Flask
 from flask import g
 from flask import request
@@ -13,8 +15,13 @@ cors = CORS(application, resources={r"/api/*": {"origins": "*"}})
 
 
 @application.route('/')
-def hello_world():
-    return 'Hello World!'
+def index():
+    print(os.getcwd())
+    return flask.send_file('templates/index.html', mimetype='text.html')
+
+@application.route('/tabset.html')
+def tabset():
+    return flask.render_template('tabset.html')
 
 
 def get_db_handle():
