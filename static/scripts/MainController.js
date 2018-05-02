@@ -175,7 +175,7 @@
 	            }
 
 
-	            $http.post('http://127.0.0.1:5000/api/mattress/' + vm.rental.mattress, data, config)
+	            $http.post('/api/mattress/' + vm.rental.mattress, data, config)
 	            .success(function (data, status, headers, config) {
 	                $scope.PostDataResponse = data;
                     vm.rental.success = true;

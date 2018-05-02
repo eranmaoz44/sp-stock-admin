@@ -149,7 +149,7 @@
 	            }
 
 
-	            $http.get('http://127.0.0.1:5000/api/mattress/' + vm.rental.mattress, config)
+	            $http.get('/api/mattress/' + vm.rental.mattress, config)
 	            .success(function (data, status, headers, config) {
 	                vm.rental.price = data;
 	            })
