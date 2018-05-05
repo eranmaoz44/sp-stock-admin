@@ -11,31 +11,31 @@
 		function getProvinces() {
 			return [
 				{
-					"name": "Classic Latex",
+					"name": "קלאסיק לטקס",
 					"value":"classic_latex"
 				},
 				{
-					"name": "Prime Latex",
+					"name": "פריים לטקס",
 					"value":"prime_latex"
 				},
 				{
-					"name": "Royalty HR",
+					"name": "רויאלטי HR",
 					"value":"royalty_hr"
 				},
+								{
+					"name": "רויאלטי HR לקשרי",
+					"value":"royalty_hr_luxury"
+				},
 				{
-					"name": "Royalty Duflex Latex",
+					"name": "רויאלטי דופלקס לטקס",
 					"value":"royalty_duflex_latex"
 				},
 				{
-					"name": "Supreme Latex & Visco",
-					"value":"supreme_latex_visco"
-				},
-				{
-					"name": "Supreme Double Visco",
+					"name": "סופרים דאבל ויסקו",
 					"value":"supreme_double_visco"
 				},
 				{
-					"name": "Supreme Double Visco, Visco Stripes Fabric",
+					"name": "סופרים דאבל ויסקו בד פסי ויסקו",
 					"value":"supreme_double_visco_visco_fabric"
 				}
 			];

@@ -28,7 +28,7 @@
 					key: 'mattress',
 					type: 'select',
 					templateOptions: {
-						label: 'mattress model name',
+						label: 'דגם',
 						// Call our province service to get a list
 						// of provinces and territories
 						options: province.getProvinces()		        
@@ -38,7 +38,7 @@
 					key: 'width',
 					type: 'select',
 					templateOptions: {
-						label: 'width',
+						label: 'רוחב',
 						// Call our province service to get a list
 						// of provinces and territories
 						options: width.getWidths()		        
@@ -48,7 +48,7 @@
 					key: 'length',
 					type: 'select',
 					templateOptions: {
-						label: 'length',
+						label: 'אורך',
 						// Call our province service to get a list
 						// of provinces and territories
 						options: length.getLengths()		        
@@ -58,7 +58,7 @@
 					type: 'input',
 					templateOptions: {
 						type: 'text',
-						label: 'Price',
+						label: 'מחיר',
 						placeholder: 'Enter Price',
 					}
 				},
