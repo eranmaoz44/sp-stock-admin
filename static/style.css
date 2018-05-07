@@ -28,3 +28,9 @@ body       { padding-top:50px; }
 .nav-tabs, .nav-pills {
     text-align:center;
 }
+
+.thebest{
+     position:absolute;
+     bottom:0;
+     right:0;
+}

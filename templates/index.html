@@ -13,13 +13,15 @@
     <!-- Application Scripts -->
     <script src="static\app.js"></script>
     <script src="static\scripts\MainController.js"></script>
-    <script src="static\scripts\SecondController.js"></script>
+      <script src="static\scripts\SecondController.js"></script>
+      <script src="static\scripts\AdminController.js"></script>
     <script src="static\scripts\province.js"></script>
     <script src="static\scripts\width.js"></script>
     <script src="static\scripts\length.js"></script>
     <meta charset=utf-8>
   </head>
   <body ng-app="formlyApp">
+  <div ng-controller="AdminController as ac">
 <tabset>
   <tab heading="מצא מחיר">
         <div class="container col-md-4 col-md-offset-4" ng-controller="SecondController as vm">
@@ -27,24 +29,36 @@
         <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
             <h1>מצא מחיר</h1>
             <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
+
+                <div ng-show="vm.rental.price">
+                    <label>מחיר: </label>
+                    <br><div style="padding-right: 1em;font-size: larger">{{ vm.rental.price }}</div>
+                    <br>
+                </div>
                 <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח</button>
             </formly-form>
-        </form> 
+        </form>
 
     </div>
   </tab>
-  <tab heading="קבע מחיר">
+    <div ng-if="ac.fields.adminMode">
+  <tab heading="קבע מחיר" >
         <div class="container col-md-4 col-md-offset-4" ng-controller="MainController as vm">
         <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
             <h1>קבע מחיר</h1>
             <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
                 <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח</button>
-                <br><label style="color:Green" ng-show="vm.rental.success">Success</label>
+                <br><label style="color:Green" ng-show="vm.rental.success">!Great Success</label>
                 <label style="color:Red" ng-show="vm.rental.failure">Failure</label>
             </formly-form>
         </form>
     </div>
   </tab>
+        </div>
 </tabset>
+      <div class="thebest">
+          <button ng-click="ac.toggleAdmin()">{{ ac.fields.toggleText }}</button>
+      </div>
+      </div>
   </body>
 </html>

@@ -53,14 +53,6 @@
 						// of provinces and territories
 						options: length.getLengths()		        
 					}
-				},				{
-					key: 'price',
-					type: 'input',
-					templateOptions: {
-						type: 'text',
-						label: 'מחיר',
-						placeholder: 'Enter Price',
-					}
 				},
 				{
 					key: 'under25',
