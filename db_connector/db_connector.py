@@ -22,3 +22,7 @@ class DBConnector(object):
     @abstractmethod
     def query_insert_or_update(self, query, args=[]):
         pass
+
+    @abstractmethod
+    def query_create_table(self, query):
+        pass

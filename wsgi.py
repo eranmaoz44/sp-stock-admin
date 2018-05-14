@@ -7,6 +7,7 @@ from flask import Response
 from flask_cors import CORS
 
 from db_connector.sqlite3_db import SQLite3DB
+from products.accessory import Accessory
 from products.mattress import Mattress
 from settings import sqlite3_db_file_path
 
@@ -46,7 +47,7 @@ def get_mattress_price(model):
 
     mattress = Mattress(model)
 
-    price = mattress.get_price([width, length], get_db_handle())
+    price = mattress.get_price(get_db_handle(), [width, length])
 
     return Response(status=200, response=str(price))
 
@@ -59,7 +60,26 @@ def set_mattress_price(model):
     price = request.get_json()['price']
     mattress = Mattress(model)
 
-    mattress.set_price([width, length], price, get_db_handle())
+    mattress.set_price(get_db_handle(), [width, length], price)
+
+    return Response(status=200)
+
+
+@application.route('/api/accessory/<name>', methods=['GET'])
+def get_accessory_price(name):
+    accessory = Accessory(name)
+
+    price = accessory.get_price(get_db_handle())
+
+    return Response(status=200, response=str(price))
+
+
+@application.route('/api/accessory/<name>', methods=['POST'])
+def set_accessory_price(name):
+    price = request.get_json()['price']
+    accessory = Accessory(name)
+
+    accessory.set_price(get_db_handle(), [], price)
 
     return Response(status=200)
 

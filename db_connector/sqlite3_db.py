@@ -34,5 +34,11 @@ class SQLite3DB(DBConnector):
         db_cursor.close()
         return rows_successfully_updated
 
+    def query_create_table(self, query):
+        db_cursor = self.db.cursor()
+        db_cursor.execute(query)
+        self.db.commit()
+        db_cursor.close()
+
     def disconnect(self):
         self.db.close()
