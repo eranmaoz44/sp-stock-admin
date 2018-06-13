@@ -173,19 +173,25 @@
 
 				var head_type = vm.rental.bed.split('_')[0] + '_bed_head'
 
-	            $http.get('/api/bed_head/' + head_type, config)
-	            .success(function (data, status, headers, config) {
-                    var bed_height_height_multiplier = parseFloat(vm.rental.bed_head_height)
 
-	                bed_head_price = Math.round(data * bed_height_height_multiplier)
-	            })
-	            .error(function (data, status, header, config) {
-	                $scope.ResponseDetails = "Data: " + data +
-	                    "<hr />status: " + status +
-	                    "<hr />headers: " + header +
-	                    "<hr />config: " + config;
-	            });
 
+				if (vm.rental.awesome) {
+
+					$http.get('/api/bed_head/' + head_type, config)
+						.success(function (data, status, headers, config) {
+							var bed_height_height_multiplier = parseFloat(vm.rental.bed_head_height)
+
+							bed_head_price = Math.round(data * bed_height_height_multiplier)
+						})
+						.error(function (data, status, header, config) {
+							$scope.ResponseDetails = "Data: " + data +
+								"<hr />status: " + status +
+								"<hr />headers: " + header +
+								"<hr />config: " + config;
+						});
+				} else {
+					bed_head_price = 0
+				}
 	            var config = {
 	                headers : {
 	                		'Content-Type': 'application/json;charset=utf-8;'
