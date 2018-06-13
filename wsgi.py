@@ -8,6 +8,8 @@ from flask_cors import CORS
 
 from db_connector.sqlite3_db import SQLite3DB
 from products.accessory import Accessory
+from products.bed import Bed
+from products.bed_head import BedHead
 from products.mattress import Mattress
 from settings import sqlite3_db_file_path
 
@@ -83,6 +85,53 @@ def set_accessory_price(name):
 
     return Response(status=200)
 
+
+@application.route('/api/bed/<model>', methods=['GET'])
+def get_bed_price(model):
+    width = request.args.get('width')
+    length = request.args.get('length')
+
+    bed = Bed(model)
+
+    price = bed.get_price(get_db_handle(), [width, length])
+
+    return Response(status=200, response=str(price))
+
+
+@application.route('/api/bed/<model>', methods=['POST'])
+def set_bed_price(model):
+    width = request.args.get('width')
+    length = request.args.get('length')
+
+    price = request.get_json()['price']
+    bed = Bed(model)
+
+    bed.set_price(get_db_handle(), [width, length], price)
+
+    return Response(status=200)
+
+
+@application.route('/api/bed_head/<model>', methods=['GET'])
+def get_bed_head_price(model):
+    width_range = request.args.get('width_range')
+
+    bed_head = BedHead(model)
+
+    price = bed_head.get_price(get_db_handle(), [width_range])
+
+    return Response(status=200, response=str(price))
+
+
+@application.route('/api/bed_head/<model>', methods=['POST'])
+def set_bed_head_price(model):
+    width_range = request.args.get('width_range')
+
+    price = request.get_json()['price']
+    bed_head = BedHead(model)
+
+    bed_head.set_price(get_db_handle(), [width_range], price)
+
+    return Response(status=200)
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
