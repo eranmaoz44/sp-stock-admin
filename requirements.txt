@@ -1,3 +1,5 @@
-gunicorn
-Flask
-flask_cors
+certifi==2019.6.16
+gunicorn==19.9.0
+pipenv==2018.11.26
+virtualenv==16.6.1
+virtualenv-clone==0.5.3
