@@ -1,4 +1,4 @@
-(function(){
+﻿(function(){
 
 	'use strict';
 
@@ -11,31 +11,23 @@
 		function getProvinces() {
 			return [
 				{
-					"name": "קלאסיק לטקס",
+					"name": "פולירון קלאסיק לטקס מערכת MRS/פולירון רויאלטי HR לקשרי",
 					"value":"classic_latex"
 				},
 				{
-					"name": "פריים לטקס",
+					"name": "פולירון פריים לטקס מערכת MRS/פולירון רויאלטי דופלקס ויסקו X7",
 					"value":"prime_latex"
 				},
 				{
-					"name": "רויאלטי HR",
+					"name": "פולירון רויאלטי HR S4000",
 					"value":"royalty_hr"
 				},
-								{
-					"name": "רויאלטי HR לקשרי",
-					"value":"royalty_hr_luxury"
-				},
 				{
-					"name": "רויאלטי דופלקס לטקס",
-					"value":"royalty_duflex_latex"
-				},
-				{
-					"name": "סופרים דאבל ויסקו",
+					"name": "פולירון סופרים לטקס + דאבל ויסקו",
 					"value":"supreme_double_visco"
 				},
 				{
-					"name": "סופרים דאבל ויסקו בד פסי ויסקו",
+					"name": "פולירון סופרים דאבל ויסקו בד משושים",
 					"value":"supreme_double_visco_visco_fabric"
 				}
 			];
