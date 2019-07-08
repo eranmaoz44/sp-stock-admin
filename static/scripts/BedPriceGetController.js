@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
 
 	'use strict';
 
@@ -206,7 +206,7 @@
 
 	            $http.get('/api/bed/' + vm.rental.bed, config)
 	            .success(function (data, status, headers, config) {
-	                vm.rental.price = Math.round((parseInt(data) + bed_head_price)*0.7)
+	                vm.rental.price = Math.round((parseInt(data) + bed_head_price))
 	            })
 	            .error(function (data, status, header, config) {
 	                $scope.ResponseDetails = "Data: " + data +
