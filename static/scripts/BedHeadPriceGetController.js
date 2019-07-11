@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
 
 	'use strict';
 
@@ -74,7 +74,7 @@
 	            .success(function (data, status, headers, config) {
                     var bed_height_height_multiplier = parseFloat(vm.rental.bed_head_height)
 
-	                vm.rental.price = Math.round(data * bed_height_height_multiplier)
+	                vm.rental.price = Math.round(data * bed_height_height_multiplier) + ' ש"ח כולל מע"מ';
 	            })
 	            .error(function (data, status, header, config) {
 	                $scope.ResponseDetails = "Data: " + data +

@@ -206,7 +206,7 @@
 
 	            $http.get('/api/bed/' + vm.rental.bed, config)
 	            .success(function (data, status, headers, config) {
-	                vm.rental.price = Math.round((parseInt(data) + bed_head_price))
+	                vm.rental.price = Math.round((parseInt(data) + bed_head_price)) + ' ש"ח כולל מע"מ';
 	            })
 	            .error(function (data, status, header, config) {
 	                $scope.ResponseDetails = "Data: " + data +

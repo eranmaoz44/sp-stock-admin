@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
 
 	'use strict';
 
@@ -51,7 +51,7 @@
 
 	            $http.get('/api/accessory/' + vm.rental.name, config)
 	            .success(function (data, status, headers, config) {
-	                vm.rental.price = data;
+	                vm.rental.price = data + ' ש"ח כולל מע"מ';
 	            })
 	            .error(function (data, status, header, config) {
 	                $scope.ResponseDetails = "Data: " + data +
