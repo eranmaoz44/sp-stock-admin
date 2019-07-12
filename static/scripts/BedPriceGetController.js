@@ -133,7 +133,7 @@
 
 	            $http.get('/api/bed/' + vm.rental.bed, config)
 	            .success(function (data, status, headers, config) {
-	                vm.rental.price = data
+	                vm.rental.price = data;
 	            })
 	            .error(function (data, status, header, config) {
 	                $scope.ResponseDetails = "Data: " + data +
@@ -201,11 +201,17 @@
 	            			'length': vm.rental.length
 	                }
 	            }
+			
 
-				console.log('head price = ' + bed_head_price)
+				console.log('head price = ' + bed_head_price);
+	            if ( vm.rental.bed == "polyron_shoam_sapir" && bed_head_price == 0){
+			console.log('shoam selected with no head, automatically ading Kappa');
+			bed_head_price = 300;
+	            }
 
 	            $http.get('/api/bed/' + vm.rental.bed, config)
 	            .success(function (data, status, headers, config) {
+		console.log("trying to calculate bed price, only the bed's price before adding head is " + data);
 	                vm.rental.price = Math.round((parseInt(data) + bed_head_price)) + ' ש"ח כולל מע"מ';
 	            })
 	            .error(function (data, status, header, config) {

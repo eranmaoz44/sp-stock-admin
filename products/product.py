@@ -32,13 +32,13 @@ class Product(object):
     def set_price(self, db_handle, specification=[], price='-1'):
         product_id = self._get_product_id(db_handle)
 
-        if not product_id:
+        if product_id is None:
             self._add_item_to_products(db_handle)
             product_id = self._get_product_id(db_handle)
 
         current_price = self.get_price(db_handle, specification)
 
-        if not current_price:
+        if current_price is None:
             set_price_result = db_handle.query_insert_or_update(
                 'INSERT INTO {}_prices (id{}, price) VALUES (?{},?)'.format(self.category,
                                                                                 self._generate_params_list(),
