@@ -33,11 +33,11 @@
     <meta charset=utf-8>
   </head>
   <body ng-app="formlyApp">
+  <img src="/static/sleepdepot.jpg" width="100%" height="22%"><br><br><br><br><br>
   <div ng-controller="AdminController as ac">
 <tabset>
-  <tab heading="מצא מחיר מזרנים">
+  <tab heading="מזרנים">
         <div class="container col-md-4 col-md-offset-4" ng-controller="SecondController as vm">
-
         <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
             <h1>מצא מחיר מזרנים</h1>
             <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
@@ -67,7 +67,7 @@
     </div>
   </tab>
         </div>
-    <tab heading="מצא מחיר מיטות">
+    <tab heading="מיטות">
         <div class="container col-md-4 col-md-offset-4" ng-controller="BedPriceGetController as vm">
 
         <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
@@ -79,6 +79,7 @@
                     <br><div style="padding-right: 1em;font-size: larger">{{ vm.rental.price }}</div>
                     <br>
                 </div>
+                <h4>מחיר לפני הנחה ברכישת מזרן</h4>
                 <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח</button>
             </formly-form>
         </form>
@@ -99,11 +100,11 @@
     </div>
   </tab>
         </div>
-    <tab heading="מצא מחיר ראשי מיטות">
+    <tab heading="ראשי מיטות">
         <div class="container col-md-4 col-md-offset-4" ng-controller="BedHeadPriceGetController as vm">
 
         <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
-            <h1>מצא מחיר ראשי מיטות</h1>
+            <h1>ראשי מיטות</h1>
             <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
 
                 <div ng-show="vm.rental.price">
@@ -131,7 +132,7 @@
     </div>
   </tab>
         </div>
-    <tab heading="מצא מחיר אביזרים">
+    <tab heading="אביזרים">
         <div class="container col-md-4 col-md-offset-4" ng-controller="AccessoryPriceGetController as vm">
 
         <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>

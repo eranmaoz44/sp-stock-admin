@@ -34,3 +34,12 @@ body       { padding-top:50px; }
      bottom:0;
      right:0;
 }
+
+tab{
+  font-size: 20;
+}
+
+tabset{
+  font-size: 30;
+  font-weight: 700;
+}
