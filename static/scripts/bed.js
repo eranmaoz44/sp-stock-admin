@@ -27,7 +27,7 @@
 					"value":"polyron_base"
 				},
                 {
-                    "name": "בסיס פולירון גל",
+                    "name": "בסיס פולירון גל / בסיס עץ יפני",
                     "value":"polyron_gal"
                 },
                 {
