@@ -5,10 +5,10 @@
 
 
 	angular
-		.module('formlyApp')
+		.module('spStockAdminApp')
 		.controller('MainController', MainController, ['$http', '$scope']);
 
-		function MainController(province, width, length, $http, $scope) {
+		function MainController(mattress, width, length, $http, $scope) {
 
 			var vm = this;
 
@@ -34,7 +34,7 @@
 						label: 'דגם',
 						// Call our province service to get a list
 						// of provinces and territories
-						options: province.getProvinces(),
+						options: mattress.getMattresses(),
 						required: true
 					}
 				},
@@ -94,24 +94,13 @@
 					hideExpression: '!model.email'
 				},
 				{
-					key: 'province',
-					type: 'select',
-					templateOptions: {
-						label: 'Province/Territory',
-						// Call our province service to get a list
-						// of provinces and territories
-						options: province.getProvinces()		        
-					},
-					hideExpression: '!model.email'
-				},
-				{
 					key: 'license',
 					type: 'input',
 					templateOptions: {
 						label: 'Driver\'s License Number',
 						placeholder: 'Enter your drivers license number'
 					},
-					hideExpression: '!model.province',
+					hideExpression: '!model.mattress',
 					validators: {
 						// Custom validator to check whether the driver's license
 						// number that the user enters is valid or not
@@ -130,7 +119,7 @@
 		          		// so we need to disable this field if we've picked a province/territory
 		          		// other than Ontario
 		          		'templateOptions.disabled': function($viewValue, $modelValue, scope) {
-		          			if(scope.model.province === 'ontario') {
+		          			if(scope.model.mattress === 'ontario') {
 		          				return false;
 		          			}
 		          			return true;
