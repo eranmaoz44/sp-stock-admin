@@ -6,9 +6,9 @@
 
 	angular
 		.module('formlyApp')
-		.controller('SecondController', SecondController, ['$http', '$scope']);
+		.controller('MattressPriceGetController', MattressPriceGetController, ['$http', '$scope']);
 
-		function SecondController(province, width, length, $http, $scope) {
+		function MattressPriceGetController(province, width, length, $http, $scope) {
 
 			var vm = this;
 
