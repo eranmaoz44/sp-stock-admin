@@ -5,7 +5,7 @@
 
 
 	angular
-		.module('formlyApp')
+		.module('spStockAdminApp')
 		.controller('BedPriceGetController', BedPriceGetController, ['$http', '$scope']);
 
 		function BedPriceGetController(bed, width, length, bed_head_height, $http, $scope) {
@@ -15,7 +15,7 @@
 
 			// The model object that we reference
 			// on the <formly-form> element in index.html
-			vm.rental = {};
+			vm.BedPriceGetForm = {};
 
 			vm.onSubmit = onSubmit;
 
@@ -28,7 +28,7 @@
 			// An array of our form fields with configuration
 			// and options set. We make reference to this in
 			// the 'fields' attribute on the <formly-form> element
-			vm.rentalFields = [
+			vm.BedPriceGetFormFields = [
 				{
 					key: 'bed',
 					type: 'select',
@@ -110,7 +110,7 @@
 			function onSubmit() {
 	           // use $.param jQuery function to serialize data from JSON
 
-				if (vm.rental.bed.startsWith('polyron_shoam') || vm.rental.bed.startsWith('polyron_turkiz')){
+				if (vm.BedPriceGetForm.bed.startsWith('polyron_shoam') || vm.BedPriceGetForm.bed.startsWith('polyron_turkiz')){
 					onSubmitBedsWithHeads()
 				} else
 				{
@@ -126,14 +126,14 @@
 	                		'Content-Type': 'application/json;charset=utf-8;'
 	                },
 	                params : {
-	            			'width': vm.rental.width,
-	            			'length': vm.rental.length
+	            			'width': vm.BedPriceGetForm.width,
+	            			'length': vm.BedPriceGetForm.length
 	                }
 	            }
 
-	            $http.get('/api/bed/' + vm.rental.bed, config)
+	            $http.get('/api/bed/' + vm.BedPriceGetForm.bed, config)
 	            .success(function (data, status, headers, config) {
-	                vm.rental.price = data;
+	                vm.BedPriceGetForm.price = data;
 	            })
 	            .error(function (data, status, header, config) {
 	                $scope.ResponseDetails = "Data: " + data +
@@ -149,10 +149,10 @@
 
 				  var width_range;
 
-				if (vm.rental.width <= 100)
+				if (vm.BedPriceGetForm.width <= 100)
 				{
 					width_range = '0-100'
-				} else if (vm.rental.width <= 160){
+				} else if (vm.BedPriceGetForm.width <= 160){
 					width_range = '101-160'
 				}
 				else
@@ -171,15 +171,15 @@
 
 				var bed_head_price;
 
-				var head_type = vm.rental.bed.split('_')[0] + '_bed_head'
+				var head_type = vm.BedPriceGetForm.bed.split('_')[0] + '_bed_head'
 
 
 
-				if (vm.rental.awesome) {
+				if (vm.BedPriceGetForm.awesome) {
 
 					$http.get('/api/bed_head/' + head_type, config)
 						.success(function (data, status, headers, config) {
-							var bed_height_height_multiplier = parseFloat(vm.rental.bed_head_height)
+							var bed_height_height_multiplier = parseFloat(vm.BedPriceGetForm.bed_head_height)
 
 							bed_head_price = Math.round(data * bed_height_height_multiplier)
 						})
@@ -197,22 +197,22 @@
 	                		'Content-Type': 'application/json;charset=utf-8;'
 	                },
 	                params : {
-	            			'width': vm.rental.width,
-	            			'length': vm.rental.length
+	            			'width': vm.BedPriceGetForm.width,
+	            			'length': vm.BedPriceGetForm.length
 	                }
 	            }
 			
 
 				console.log('head price = ' + bed_head_price);
-	            if ( vm.rental.bed == "polyron_shoam_sapir" && bed_head_price == 0){
+	            if ( vm.BedPriceGetForm.bed == "polyron_shoam_sapir" && bed_head_price == 0){
 			console.log('shoam selected with no head, automatically ading Kappa');
 			bed_head_price = 300;
 	            }
 
-	            $http.get('/api/bed/' + vm.rental.bed, config)
+	            $http.get('/api/bed/' + vm.BedPriceGetForm.bed, config)
 	            .success(function (data, status, headers, config) {
 		console.log("trying to calculate bed price, only the bed's price before adding head is " + data);
-	                vm.rental.price = Math.round((parseInt(data) + bed_head_price)) + ' ש"ח כולל מע"מ';
+	                vm.BedPriceGetForm.price = Math.round((parseInt(data) + bed_head_price)) + ' ש"ח כולל מע"מ';
 	            })
 	            .error(function (data, status, header, config) {
 	                $scope.ResponseDetails = "Data: " + data +

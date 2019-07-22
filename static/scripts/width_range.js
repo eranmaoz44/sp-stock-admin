@@ -3,7 +3,7 @@
 	'use strict';
 
 	angular
-		.module('formlyApp')
+		.module('spStockAdminApp')
 		.factory('width_range', width_range);
 
 	function width_range() {

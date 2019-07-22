@@ -3,8 +3,8 @@
 	'use strict';
 
 	angular
-		.module('formlyApp')
-		.factory('mattress', province);
+		.module('spStockAdminApp')
+		.factory('mattress', mattress);
 
 	function mattress() {
 

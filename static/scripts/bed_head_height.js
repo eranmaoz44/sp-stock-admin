@@ -3,7 +3,7 @@
 	'use strict';
 
 	angular
-		.module('formlyApp')
+		.module('spStockAdminApp')
 		.factory('bed_head_height', bed_head_height);
 
 	function bed_head_height() {

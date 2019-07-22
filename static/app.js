@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	angular.module('formlyApp', ['formly', 'formlyBootstrap'])
+	angular.module('spStockAdminApp', ['formly', 'formlyBootstrap'])
 	.directive('tab', function() {
   return {
 	  restrict: 'E',

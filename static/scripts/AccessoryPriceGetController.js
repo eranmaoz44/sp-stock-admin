@@ -5,7 +5,7 @@
 
 
 	angular
-		.module('formlyApp')
+		.module('spStockAdminApp')
 		.controller('AccessoryPriceGetController', AccessoryPriceGetController, ['$http', '$scope']);
 
 		function AccessoryPriceGetController(accessory, $http, $scope) {

@@ -5,7 +5,7 @@
 
 
 	angular
-		.module('formlyApp')
+		.module('spStockAdminApp')
 		.controller('BedHeadPriceGetController', BedHeadPriceGetController, ['$http', '$scope']);
 
 		function BedHeadPriceGetController(bed_head, width_range, bed_head_height, $http, $scope) {

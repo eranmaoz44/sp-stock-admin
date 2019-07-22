@@ -3,7 +3,7 @@
 	'use strict';
 
 	angular
-		.module('formlyApp')
+		.module('spStockAdminApp')
 		.factory('bed_head', bed_head);
 
 	function bed_head() {

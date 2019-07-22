@@ -5,7 +5,7 @@
 
 
 	angular
-		.module('formlyApp')
+		.module('spStockAdminApp')
 		.controller('AdminController', AdminController, ['$scope']);
 
 		function AdminController($scope) {
