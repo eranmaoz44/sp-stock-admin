@@ -69,17 +69,17 @@
     <tab heading="מיטות">
         <div class="container col-md-4 col-md-offset-4" ng-controller="BedPriceGetController as vm">
 
-        <form name="vm.BedPriceGetForm" ng-submit="vm.onSubmit()" novalidate>
+        <form name="vm.bedPriceGetForm" ng-submit="vm.onSubmit()" novalidate>
             <h1>מצא מחיר מיטות</h1>
-            <formly-form model="vm.BedPriceGetForm" fields="vm.BedPriceGetFormFields" form="vm.BedPriceGetForm">
+            <formly-form model="vm.bedPriceGetForm" fields="vm.bedPriceGetFormFields" form="vm.bedPriceGetForm">
 
-                <div ng-show="vm.BedPriceGetForm.price">
+                <div ng-show="vm.bedPriceGetForm.price">
                     <label>מחיר: </label>
-                    <br><div style="padding-right: 1em;font-size: larger">{{ vm.BedPriceGetForm.price }}</div>
+                    <br><div style="padding-right: 1em;font-size: larger">{{ vm.bedPriceGetForm.price }}</div>
                     <br>
                 </div>
                 <h4>**מחיר לפני הנחה ברכישת מזרן</h4>
-                <button type="submit" class="btn btn-primary" ng-disabled="vm.BedPriceGetForm.$invalid">שלח</button>
+                <button type="submit" class="btn btn-primary" ng-disabled="vm.bedPriceGetForm.$invalid">שלח</button>
             </formly-form>
         </form>
 

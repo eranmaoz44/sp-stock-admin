@@ -11,6 +11,7 @@ from products.accessory import Accessory
 from products.bed import Bed
 from products.bed_head import BedHead
 from products.mattress import Mattress
+from products.polyron_bed import PolyronBed
 from settings import sqlite3_db_file_path
 
 application = Flask(__name__)
@@ -94,6 +95,19 @@ def get_bed_price(model):
     bed = Bed(model)
 
     price = bed.get_price(get_db_handle(), [width, length])
+
+    return Response(status=200, response=str(price))
+
+
+@application.route('/api/polyron_bed/<model>', methods=['GET'])
+def get_polyron_bed_price(model):
+    width = request.args.get('width')
+    length = request.args.get('length')
+    head_height = request.args.get('head_height')
+
+    bed = PolyronBed(model)
+
+    price = bed.get_price(get_db_handle(), int(width), length, int(head_height))
 
     return Response(status=200, response=str(price))
 

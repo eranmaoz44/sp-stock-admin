@@ -15,7 +15,7 @@
 
 			// The model object that we reference
 			// on the <formly-form> element in index.html
-			vm.BedPriceGetForm = {};
+			vm.bedPriceGetForm = {};
 
 			vm.onSubmit = onSubmit;
 
@@ -28,7 +28,7 @@
 			// An array of our form fields with configuration
 			// and options set. We make reference to this in
 			// the 'fields' attribute on the <formly-form> element
-			vm.BedPriceGetFormFields = [
+			vm.bedPriceGetFormFields = [
 				{
 					key: 'bed',
 					type: 'select',
@@ -60,7 +60,7 @@
 					}
 				},
 			  {
-				key: 'awesome',
+				key: 'isWithHead',
 				type: 'checkbox',
 				templateOptions: { label: '' },
 				expressionProperties: {
@@ -79,7 +79,7 @@
 
 				},
 				  ngModelElAttrs: {
-					  "ng-init": "model.awesome=true"
+					  "ng-init": "model.isWithHead=true"
 				  }
 			  },
       {
@@ -96,7 +96,7 @@
           'templateOptions.disabled': 'formState.awesomeIsForced'
         },
         hideExpression: function($viewValue, $modelValue, scope) {
-				  return !(scope.model.bed.startsWith('polyron_shoam') || scope.model.bed.startsWith('polyron_turkiz')) || !scope.model.awesome
+				  return !(scope.model.bed.startsWith('polyron_shoam') || scope.model.bed.startsWith('polyron_turkiz')) || !scope.model.isWithHead
 				},
         templateOptions: {
           label: 'גובה ראש מיטה',
@@ -110,7 +110,7 @@
 			function onSubmit() {
 	           // use $.param jQuery function to serialize data from JSON
 
-				if (vm.BedPriceGetForm.bed.startsWith('polyron_shoam') || vm.BedPriceGetForm.bed.startsWith('polyron_turkiz')){
+				if (vm.bedPriceGetForm.isWithHead){
 					onSubmitBedsWithHeads()
 				} else
 				{
@@ -126,14 +126,14 @@
 	                		'Content-Type': 'application/json;charset=utf-8;'
 	                },
 	                params : {
-	            			'width': vm.BedPriceGetForm.width,
-	            			'length': vm.BedPriceGetForm.length
+	            			'width': vm.bedPriceGetForm.width,
+	            			'length': vm.bedPriceGetForm.length
 	                }
 	            }
 
-	            $http.get('/api/bed/' + vm.BedPriceGetForm.bed, config)
+	            $http.get('/api/bed/' + vm.bedPriceGetForm.bed, config)
 	            .success(function (data, status, headers, config) {
-	                vm.BedPriceGetForm.price = data;
+	                vm.bedPriceGetForm.price = data;
 	            })
 	            .error(function (data, status, header, config) {
 	                $scope.ResponseDetails = "Data: " + data +
@@ -143,76 +143,23 @@
 	            });
         	};
 
+
 			function onSubmitBedsWithHeads() {
-	           // use $.param jQuery function to serialize data from JSON
 
-
-				  var width_range;
-
-				if (vm.BedPriceGetForm.width <= 100)
-				{
-					width_range = '0-100'
-				} else if (vm.BedPriceGetForm.width <= 160){
-					width_range = '101-160'
-				}
-				else
-				{
-					width_range = '161-200'
-				}
-
-				  var config = {
-					  headers: {
-						  'Content-Type': 'application/json;charset=utf-8;'
-					  },
-					  params: {
-						  'width_range': width_range
-					  }
-				  }
-
-				var bed_head_price;
-
-				var head_type = vm.BedPriceGetForm.bed.split('_')[0] + '_bed_head'
-
-
-
-				if (vm.BedPriceGetForm.awesome) {
-
-					$http.get('/api/bed_head/' + head_type, config)
-						.success(function (data, status, headers, config) {
-							var bed_height_height_multiplier = parseFloat(vm.BedPriceGetForm.bed_head_height)
-
-							bed_head_price = Math.round(data * bed_height_height_multiplier)
-						})
-						.error(function (data, status, header, config) {
-							$scope.ResponseDetails = "Data: " + data +
-								"<hr />status: " + status +
-								"<hr />headers: " + header +
-								"<hr />config: " + config;
-						});
-				} else {
-					bed_head_price = 0
-				}
 	            var config = {
 	                headers : {
 	                		'Content-Type': 'application/json;charset=utf-8;'
 	                },
 	                params : {
-	            			'width': vm.BedPriceGetForm.width,
-	            			'length': vm.BedPriceGetForm.length
+	            			'width': vm.bedPriceGetForm.width,
+	            			'length': vm.bedPriceGetForm.length,
+	            			'head_height': vm.bedPriceGetForm.bed_head_height
 	                }
 	            }
-			
 
-				console.log('head price = ' + bed_head_price);
-	            if ( vm.BedPriceGetForm.bed == "polyron_shoam_sapir" && bed_head_price == 0){
-			console.log('shoam selected with no head, automatically ading Kappa');
-			bed_head_price = 300;
-	            }
-
-	            $http.get('/api/bed/' + vm.BedPriceGetForm.bed, config)
+	            $http.get('/api/polyron_bed/' + vm.bedPriceGetForm.bed, config)
 	            .success(function (data, status, headers, config) {
-		console.log("trying to calculate bed price, only the bed's price before adding head is " + data);
-	                vm.BedPriceGetForm.price = Math.round((parseInt(data) + bed_head_price)) + ' ש"ח כולל מע"מ';
+	                vm.bedPriceGetForm.price = data + ' ש"ח כולל מע"מ';
 	            })
 	            .error(function (data, status, header, config) {
 	                $scope.ResponseDetails = "Data: " + data +
