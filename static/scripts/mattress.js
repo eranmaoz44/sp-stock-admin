@@ -4,11 +4,11 @@
 
 	angular
 		.module('formlyApp')
-		.factory('province', province);
+		.factory('mattress', province);
 
-	function province() {
+	function mattress() {
 
-		function getProvinces() {
+		function getMattresses() {
 			return [
 				{
 					"name": "פולירון קלאסיק לטקס מערכת MRS/פולירון רויאלטי HR לקשרי",
@@ -34,7 +34,7 @@
 		}
 
 		return {
-			getProvinces: getProvinces
+			getMattresses: getMattresses
 		}
 	}
 })();
