@@ -92,9 +92,16 @@ def get_bed_price(model):
     width = request.args.get('width')
     length = request.args.get('length')
 
-    bed = Bed(model)
-
-    price = bed.get_price(get_db_handle(), [width, length])
+    # Polyron beds require special treatment
+    if 'polyron' in model:
+        head_height = request.args.get('head_height')
+        if head_height is None:
+            head_height = 0
+        bed = PolyronBed(model)
+        price = bed.get_price(get_db_handle(), int(width), length, int(head_height))
+    else:
+        bed = Bed(model)
+        price = bed.get_price(get_db_handle(), [width, length])
 
     return Response(status=200, response=str(price))
 

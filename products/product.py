@@ -7,6 +7,9 @@ class Product(object):
         self.category = category
         self.parameters = parameters
 
+    def get_name(self):
+        return self.name
+
     def get_price(self, db_handle, specification=[]):
         product_id = self._get_product_id(db_handle)
         price = self._get_price_with_id(db_handle, specification, product_id)

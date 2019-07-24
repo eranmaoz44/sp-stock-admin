@@ -11,6 +11,10 @@
 		function getBedHeadHeights() {
 			return [
 				{
+					"name": "ללא ראש",
+					"value":"0"
+				},
+				{
 					"name": "ראש בגובה 100 סנטימטר (110 סנטימטר מהרצפה)",
 					"value":"110"
 				},

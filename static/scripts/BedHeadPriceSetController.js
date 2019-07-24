@@ -64,7 +64,7 @@
 		          		price: function($viewValue, $modelValue, scope) {
 		          			var value = $modelValue || $viewValue;
 		          			if(value) {
-		          				// call the validateDriversLicense function
+		          				// call the validateDriversLicense functi on
 		          				// which either returns true or false
 		          				// depending on whether the entry is valid
 		          				return validatePrice(value)

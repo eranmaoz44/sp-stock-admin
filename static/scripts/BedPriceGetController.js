@@ -19,12 +19,6 @@
 
 			vm.onSubmit = onSubmit;
 
-			vm.options = {
-      			formState: {
-        			awesomeIsForced: true
-      			}
-    		};
-
 			// An array of our form fields with configuration
 			// and options set. We make reference to this in
 			// the 'fields' attribute on the <formly-form> element
@@ -36,7 +30,8 @@
 						label: 'דגם',
 						// Call our province service to get a list
 						// of provinces and territories
-						options: bed.getBeds()
+						options: bed.getBeds(),
+						required: true
 					}
 				},
 				{
@@ -46,7 +41,8 @@
 						label: 'רוחב',
 						// Call our province service to get a list
 						// of provinces and territories
-						options: width.getWidths()		        
+						options: width.getWidths(),
+						required: true
 					}
 				},
 				{
@@ -56,51 +52,30 @@
 						label: 'אורך',
 						// Call our province service to get a list
 						// of provinces and territories
-						options: length.getLengths()		        
+						options: length.getLengths(),
+						required: true
 					}
 				},
-			  {
-				key: 'isWithHead',
-				type: 'checkbox',
-				templateOptions: { label: '' },
-				expressionProperties: {
-				  'templateOptions.disabled': 'formState.awesomeIsForced',
-				  'templateOptions.label': function(viewValue, modelValue, scope) {
-					if (scope.formState.awesomeIsForced) {
-					  return 'בלי ראש מיטה';
-					} else {
-					  return 'ווו  עם ראש מיטה';
-					}
-				  }
-				},
-
-				hideExpression: function($viewValue, $modelValue, scope) {
-				  return !(scope.model.bed.startsWith('polyron_shoam') || scope.model.bed.startsWith('polyron_turkiz'))
-
-				},
-				  ngModelElAttrs: {
-					  "ng-init": "model.isWithHead=true"
-				  }
-			  },
-      {
+        {
         key: 'bed_head_height',
         type: 'select',
         expressionProperties: {
           'templateOptions.placeholder': function(viewValue, modelValue, scope) {
-            if (scope.formState.awesomeIsForced) {
-              return 'Too bad... It really is awesome! Wasn\'t that cool?';
-            } else {
-              return 'Type in here... I dare you';
-            }
-          },
-          'templateOptions.disabled': 'formState.awesomeIsForced'
+               if (typeof scope.model.bed === "undefined" || !(scope.model.bed.startsWith('polyron_shoam') || scope.model.bed.startsWith('polyron_turkiz'))){
+                    scope.model.bed_head_height = 0
+               }
+          }
         },
         hideExpression: function($viewValue, $modelValue, scope) {
-				  return !(scope.model.bed.startsWith('polyron_shoam') || scope.model.bed.startsWith('polyron_turkiz')) || !scope.model.isWithHead
+				  return typeof scope.model.bed === "undefined" || !(scope.model.bed.startsWith('polyron_shoam') || scope.model.bed.startsWith('polyron_turkiz'))
 				},
         templateOptions: {
           label: 'גובה ראש מיטה',
-          options: bed_head_height.getBedHeadHeights()
+          options: bed_head_height.getBedHeadHeights(),
+          required: true
+        },
+        ngModelElAttrs: {
+            "ng-init": "model.bed_head_height=0"
         }
       }
 
@@ -110,43 +85,7 @@
 			function onSubmit() {
 	           // use $.param jQuery function to serialize data from JSON
 
-				if (vm.bedPriceGetForm.isWithHead){
-					onSubmitBedsWithHeads()
-				} else
-				{
-					onSubmitBedWithoutHeads()
-				}
-        	};
-
-			function onSubmitBedWithoutHeads() {
-	           // use $.param jQuery function to serialize data from JSON
-
-	            var config = {
-	                headers : {
-	                		'Content-Type': 'application/json;charset=utf-8;'
-	                },
-	                params : {
-	            			'width': vm.bedPriceGetForm.width,
-	            			'length': vm.bedPriceGetForm.length
-	                }
-	            }
-
-	            $http.get('/api/bed/' + vm.bedPriceGetForm.bed, config)
-	            .success(function (data, status, headers, config) {
-	                vm.bedPriceGetForm.price = data;
-	            })
-	            .error(function (data, status, header, config) {
-	                $scope.ResponseDetails = "Data: " + data +
-	                    "<hr />status: " + status +
-	                    "<hr />headers: " + header +
-	                    "<hr />config: " + config;
-	            });
-        	};
-
-
-			function onSubmitBedsWithHeads() {
-
-	            var config = {
+                var config = {
 	                headers : {
 	                		'Content-Type': 'application/json;charset=utf-8;'
 	                },
@@ -157,7 +96,7 @@
 	                }
 	            }
 
-	            $http.get('/api/polyron_bed/' + vm.bedPriceGetForm.bed, config)
+	            $http.get('/api/bed/' + vm.bedPriceGetForm.bed, config)
 	            .success(function (data, status, headers, config) {
 	                vm.bedPriceGetForm.price = data + ' ש"ח כולל מע"מ';
 	            })
@@ -168,7 +107,6 @@
 	                    "<hr />config: " + config;
 	            });
         	};
-     
 
 		}
 
