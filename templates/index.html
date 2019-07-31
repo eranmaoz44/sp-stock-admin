@@ -1,5 +1,5 @@
 <html dir="rtl">
-  <head>
+<head>
     <title>מחירים, אה?</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="static\style.css">
@@ -13,160 +13,235 @@
     <!-- Application Scripts -->
     <script src="static\app.js"></script>
     <script src="static\scripts\MattressPriceSetController.js"></script>
-      <script src="static\scripts\MattressPriceGetController.js"></script>
-      <script src="static\scripts\AccessoryPriceSetController.js"></script>
-      <script src="static\scripts\AccessoryPriceGetController.js"></script>
-            <script src="static\scripts\BedPriceSetController.js"></script>
-      <script src="static\scripts\BedPriceGetController.js"></script>
-      <script src="static\scripts\BedHeadPriceGetController.js"></script>
-      <script src="static\scripts\BedHeadPriceSetController.js"></script>
-      <script src="static\scripts\AdminController.js"></script>
+    <script src="static\scripts\MattressPriceGetController.js"></script>
+    <script src="static\scripts\AccessoryPriceSetController.js"></script>
+    <script src="static\scripts\AccessoryPriceGetController.js"></script>
+    <script src="static\scripts\BedPriceSetController.js"></script>
+    <script src="static\scripts\BedPriceGetController.js"></script>
+    <script src="static\scripts\BedHeadPriceGetController.js"></script>
+    <script src="static\scripts\BedHeadPriceSetController.js"></script>
+    <script src="static\scripts\AdminController.js"></script>
+    <script src="static\scripts\YouthCouchPriceGetController.js"></script>
+    <script src="static\scripts\YouthCouchPriceSetController.js"></script>
     <script src="static\scripts\mattress.js"></script>
+    <script src="static\scripts\sapot_noar_half_width.js"></script>
+    <script src="static\scripts\sapot_noar_half_length.js"></script>
     <script src="static\scripts\width.js"></script>
     <script src="static\scripts\length.js"></script>
-      <script src="static\scripts\accessory.js"></script>
-      <script src="static\scripts\bed.js"></script>
-      <script src="static\scripts\bed_head.js"></script>
-      <script src="static\scripts\bed_head_height.js"></script>
-      <script src="static\scripts\width_range.js"></script>
+    <script src="static\scripts\accessory.js"></script>
+    <script src="static\scripts\bed.js"></script>
+    <script src="static\scripts\bed_head.js"></script>
+    <script src="static\scripts\bed_head_height.js"></script>
+    <script src="static\scripts\width_range.js"></script>
+    <script src="static\scripts\youth_couch.js"></script>
     <meta charset=utf-8>
-  </head>
-  <body ng-app="spStockAdminApp">
-  <img src="/static/sleepdepot.jpg" width="100%" height="22%"><br><br><br><br><br>
-  <div ng-controller="AdminController as ac">
-<tabset>
-  <tab heading="מזרנים">
-        <div class="container col-md-4 col-md-offset-4" ng-controller="MattressPriceGetController as vm">
-        <form name="vm.mattressPriceGetForm" ng-submit="vm.onSubmit()" novalidate>
-            <h1>מצא מחיר מזרנים</h1>
-            <formly-form model="vm.mattressPriceGetForm" fields="vm.mattressPriceGetFormFields" form="vm.mattressPriceGetForm">
+</head>
+<body ng-app="spStockAdminApp">
+<img src="/static/sleepdepot.jpg" width="100%" height="22%"><br><br><br><br><br>
+<div ng-controller="AdminController as ac">
+    <tabset>
+        <div ng-if="!ac.fields.adminMode">
+            <tab heading="מזרנים">
+                <div class="container col-md-4 col-md-offset-4" ng-controller="MattressPriceGetController as vm">
+                    <form name="vm.mattressPriceGetForm" ng-submit="vm.onSubmit()" novalidate>
+                        <h1>מצא מחיר מזרנים</h1>
+                        <formly-form model="vm.mattressPriceGetForm" fields="vm.mattressPriceGetFormFields"
+                                     form="vm.mattressPriceGetForm">
 
-                <div ng-show="vm.mattressPriceGetForm.price">
-                    <label>מחיר: </label>
-                    <br><div style="padding-right: 1em;font-size: larger">{{ vm.mattressPriceGetForm.price }}</div>
-                    <br>
+                            <div ng-show="vm.mattressPriceGetForm.price">
+                                <label>מחיר: </label>
+                                <br>
+                                <div style="padding-right: 1em;font-size: larger">{{ vm.mattressPriceGetForm.price }}
+                                </div>
+                                <br>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                    ng-disabled="vm.mattressPriceGetForm.$invalid">שלח
+                            </button>
+                        </formly-form>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-primary" ng-disabled="vm.mattressPriceGetForm.$invalid">שלח</button>
-            </formly-form>
-        </form>
-
-    </div>
-  </tab>
-    <div ng-if="ac.fields.adminMode">
-  <tab heading="קבע מחיר מזרנים" >
-        <div class="container col-md-4 col-md-offset-4" ng-controller="MattressPriceSetController as vm">
-        <form name="vm.mattressPriceSetForm" ng-submit="vm.onSubmit()" novalidate>
-            <h1>קבע מחיר מזרנים</h1>
-            <formly-form model="vm.mattressPriceSetForm" fields="vm.mattressPriceSetFormFields" form="vm.mattressPriceSetForm">
-                <button type="submit" class="btn btn-primary" ng-disabled="vm.mattressPriceSetForm.$invalid">שלח</button>
-                <br><label style="color:Green" ng-show="vm.mattressPriceSetForm.success">!Great Success</label>
-                <label style="color:Red" ng-show="vm.mattressPriceSetForm.failure">Failure</label>
-            </formly-form>
-        </form>
-    </div>
-  </tab>
         </div>
-    <tab heading="מיטות">
-        <div class="container col-md-4 col-md-offset-4" ng-controller="BedPriceGetController as vm">
-
-        <form name="vm.bedPriceGetForm" ng-submit="vm.onSubmit()" novalidate>
-            <h1>מצא מחיר מיטות</h1>
-            <formly-form model="vm.bedPriceGetForm" fields="vm.bedPriceGetFormFields" form="vm.bedPriceGetForm">
-
-                <div ng-show="vm.bedPriceGetForm.price">
-                    <label>מחיר: </label>
-                    <br><div style="padding-right: 1em;font-size: larger">{{ vm.bedPriceGetForm.price }}</div>
-                    <br>
+        </tab>
+        <div ng-if="ac.fields.adminMode">
+            <tab heading="קבע מחיר מזרנים">
+                <div class="container col-md-4 col-md-offset-4" ng-controller="MattressPriceSetController as vm">
+                    <form name="vm.mattressPriceSetForm" ng-submit="vm.onSubmit()" novalidate>
+                        <h1>קבע מחיר מזרנים</h1>
+                        <formly-form model="vm.mattressPriceSetForm" fields="vm.mattressPriceSetFormFields"
+                                     form="vm.mattressPriceSetForm">
+                            <button type="submit" class="btn btn-primary"
+                                    ng-disabled="vm.mattressPriceSetForm.$invalid">שלח
+                            </button>
+                            <br><label style="color:Green" ng-show="vm.mattressPriceSetForm.success">!Great
+                            Success</label>
+                            <label style="color:Red" ng-show="vm.mattressPriceSetForm.failure">Failure</label>
+                        </formly-form>
+                    </form>
                 </div>
-                <h4>**מחיר לפני הנחה ברכישת מזרן</h4>
-                <button type="submit" class="btn btn-primary" ng-disabled="vm.bedPriceGetForm.$invalid">שלח</button>
-            </formly-form>
-        </form>
-
-    </div>
-  </tab>
-    <div ng-if="ac.fields.adminMode">
-  <tab heading="קבע מחיר מיטות" >
-        <div class="container col-md-4 col-md-offset-4" ng-controller="BedPriceSetController as vm">
-        <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
-            <h1>קבע מחיר מיטות</h1>
-            <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
-                <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח</button>
-                <br><label style="color:Green" ng-show="vm.rental.success">!Great Success</label>
-                <label style="color:Red" ng-show="vm.rental.failure">Failure</label>
-            </formly-form>
-        </form>
-    </div>
-  </tab>
+            </tab>
         </div>
-    <tab heading="ראשי מיטות">
-        <div class="container col-md-4 col-md-offset-4" ng-controller="BedHeadPriceGetController as vm">
+        <div ng-if="!ac.fields.adminMode">
+            <tab heading="מיטות">
+                <div class="container col-md-4 col-md-offset-4" ng-controller="BedPriceGetController as vm">
 
-        <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
-            <h1>ראשי מיטות</h1>
-            <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
+                    <form name="vm.bedPriceGetForm" ng-submit="vm.onSubmit()" novalidate>
+                        <h1>מצא מחיר מיטות</h1>
+                        <formly-form model="vm.bedPriceGetForm" fields="vm.bedPriceGetFormFields"
+                                     form="vm.bedPriceGetForm">
 
-                <div ng-show="vm.rental.price">
-                    <label>מחיר: </label>
-                    <br><div style="padding-right: 1em;font-size: larger">{{ vm.rental.price }}</div>
-                    <br>
+                            <div ng-show="vm.bedPriceGetForm.price">
+                                <label>מחיר: </label>
+                                <br>
+                                <div style="padding-right: 1em;font-size: larger">{{ vm.bedPriceGetForm.price }}</div>
+                                <br>
+                            </div>
+                            <h4>**מחיר לפני הנחה ברכישת מזרן</h4>
+                            <button type="submit" class="btn btn-primary" ng-disabled="vm.bedPriceGetForm.$invalid">שלח
+                            </button>
+                        </formly-form>
+                    </form>
+
                 </div>
-                <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח</button>
-            </formly-form>
-        </form>
-
-    </div>
-  </tab>
-    <div ng-if="ac.fields.adminMode">
-  <tab heading="קבע מחיר ראשי מיטות" >
-        <div class="container col-md-4 col-md-offset-4" ng-controller="BedHeadPriceSetController as vm">
-        <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
-            <h1>קבע מחיר ראשי מיטות</h1>
-            <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
-                <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח</button>
-                <br><label style="color:Green" ng-show="vm.rental.success">!Great Success</label>
-                <label style="color:Red" ng-show="vm.rental.failure">Failure</label>
-            </formly-form>
-        </form>
-    </div>
-  </tab>
+            </tab>
         </div>
-    <tab heading="אביזרים">
-        <div class="container col-md-4 col-md-offset-4" ng-controller="AccessoryPriceGetController as vm">
-
-        <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
-            <h1>מצא מחיר אביזרים</h1>
-            <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
-
-                <div ng-show="vm.rental.price">
-                    <label>מחיר: </label>
-                    <br><div style="padding-right: 1em;font-size: larger">{{ vm.rental.price }}</div>
-                    <br>
+        <div ng-if="ac.fields.adminMode">
+            <tab heading="קבע מחיר מיטות">
+                <div class="container col-md-4 col-md-offset-4" ng-controller="BedPriceSetController as vm">
+                    <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
+                        <h1>קבע מחיר מיטות</h1>
+                        <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
+                            <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח
+                            </button>
+                            <br><label style="color:Green" ng-show="vm.rental.success">!Great Success</label>
+                            <label style="color:Red" ng-show="vm.rental.failure">Failure</label>
+                        </formly-form>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח</button>
-            </formly-form>
-        </form>
-
-    </div>
-  </tab>
-    <div ng-if="ac.fields.adminMode">
-  <tab heading="קבע מחיר אביזרים" >
-        <div class="container col-md-4 col-md-offset-4" ng-controller="AccessoryPriceSetController as vm">
-        <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
-            <h1>קבע מחיר אביזרים</h1>
-            <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
-                <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח</button>
-                <br><label style="color:Green" ng-show="vm.rental.success">!Great Success</label>
-                <label style="color:Red" ng-show="vm.rental.failure">Failure</label>
-            </formly-form>
-        </form>
-    </div>
-  </tab>
+            </tab>
         </div>
-</tabset>
-      <div class="thebest">
-          <button ng-click="ac.toggleAdmin()">{{ ac.fields.toggleText }}</button>
-      </div>
-      </div>
-  </body>
+        <div ng-if="ac.fields.adminMode">
+            <tab heading="ראשי מיטות">
+                <div class="container col-md-4 col-md-offset-4" ng-controller="BedHeadPriceGetController as vm">
+
+                    <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
+                        <h1>ראשי מיטות</h1>
+                        <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
+
+                            <div ng-show="vm.rental.price">
+                                <label>מחיר: </label>
+                                <br>
+                                <div style="padding-right: 1em;font-size: larger">{{ vm.rental.price }}</div>
+                                <br>
+                            </div>
+                            <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח
+                            </button>
+                        </formly-form>
+                    </form>
+
+                </div>
+            </tab>
+        </div>
+        <div ng-if="ac.fields.adminMode">
+            <tab heading="קבע מחיר ראשי מיטות">
+                <div class="container col-md-4 col-md-offset-4" ng-controller="BedHeadPriceSetController as vm">
+                    <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
+                        <h1>קבע מחיר ראשי מיטות</h1>
+                        <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
+                            <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח
+                            </button>
+                            <br><label style="color:Green" ng-show="vm.rental.success">!Great Success</label>
+                            <label style="color:Red" ng-show="vm.rental.failure">Failure</label>
+                        </formly-form>
+                    </form>
+                </div>
+            </tab>
+        </div>
+        <div ng-if="!ac.fields.adminMode">
+            <tab heading="אביזרים">
+                <div class="container col-md-4 col-md-offset-4" ng-controller="AccessoryPriceGetController as vm">
+
+                    <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
+                        <h1>מצא מחיר אביזרים</h1>
+                        <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
+
+                            <div ng-show="vm.rental.price">
+                                <label>מחיר: </label>
+                                <br>
+                                <div style="padding-right: 1em;font-size: larger">{{ vm.rental.price }}</div>
+                                <br>
+                            </div>
+                            <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח
+                            </button>
+                        </formly-form>
+                    </form>
+
+                </div>
+            </tab>
+        </div>
+        <div ng-if="ac.fields.adminMode">
+            <tab heading="קבע מחיר אביזרים">
+                <div class="container col-md-4 col-md-offset-4" ng-controller="AccessoryPriceSetController as vm">
+                    <form name="vm.rentalForm" ng-submit="vm.onSubmit()" novalidate>
+                        <h1>קבע מחיר אביזרים</h1>
+                        <formly-form model="vm.rental" fields="vm.rentalFields" form="vm.rentalForm">
+                            <button type="submit" class="btn btn-primary" ng-disabled="vm.rentalForm.$invalid">שלח
+                            </button>
+                            <br><label style="color:Green" ng-show="vm.rental.success">!Great Success</label>
+                            <label style="color:Red" ng-show="vm.rental.failure">Failure</label>
+                        </formly-form>
+                    </form>
+                </div>
+            </tab>
+        </div>
+        <div ng-if="!ac.fields.adminMode">
+            <tab heading="ספות נוער">
+                <div class="container col-md-4 col-md-offset-4" ng-controller="YouthCouchPriceGetController as vm">
+                    <form name="vm.youthCouchPriceGetForm" ng-submit="vm.onSubmit()" novalidate>
+                        <h1>מצא מחיר ספות נוער</h1>
+                        <formly-form model="vm.youthCouchPriceGetForm" fields="vm.youthCouchPriceGetFormFields"
+                                     form="vm.youthCouchPriceGetForm">
+
+                            <div ng-show="vm.youthCouchPriceGetForm.price">
+                                <label>מחיר: </label>
+                                <br>
+                                <div style="padding-right: 1em;font-size: larger">{{ vm.youthCouchPriceGetForm.price }}
+                                </div>
+                                <br>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                    ng-disabled="vm.youthCouchPriceGetForm.$invalid">
+                                שלח
+                            </button>
+                        </formly-form>
+                    </form>
+
+                </div>
+            </tab>
+        </div>
+        <div ng-if="ac.fields.adminMode">
+            <tab heading="קבע מחיר ספות נוער">
+                <div class="container col-md-4 col-md-offset-4" ng-controller="YouthCouchPriceSetController as vm">
+                    <form name="vm.youthCouchPriceSetForm" ng-submit="vm.onSubmit()" novalidate>
+                        <h1>קבע מחיר ספות נוער</h1>
+                        <formly-form model="vm.youthCouchPriceSetForm" fields="vm.youthCouchPriceSetFormFields"
+                                     form="vm.youthCouchPriceSetForm">
+                            <button type="submit" class="btn btn-primary"
+                                    ng-disabled="vm.youthCouchPriceSetForm.$invalid">שלח
+                            </button>
+                            <br><label style="color:Green" ng-show="vm.youthCouchPriceSetForm.success">!Great
+                            Success</label>
+                            <label style="color:Red" ng-show="vm.youthCouchPriceSetForm.failure">Failure</label>
+                        </formly-form>
+                    </form>
+                </div>
+            </tab>
+        </div>
+        </tab>
+    </tabset>
+    <div class="thebest">
+        <button ng-click="ac.toggleAdmin()">{{ ac.fields.toggleText }}</button>
+    </div>
+</div>
+</body>
 </html>

@@ -1,0 +1,36 @@
+(function(){
+
+	'use strict';
+
+	angular
+		.module('spStockAdminApp')
+		.factory('sapot_noar_half_length', sapot_noar_half_length);
+
+	function sapot_noar_half_length() {
+
+		function getSapotNoarHalfLengths() {
+			return [
+				{
+					"name": "180",
+					"value":"180"
+				},
+				{
+					"name": "190",
+					"value":"190"
+				},
+				{
+					"name": "200",
+					"value":"200"
+				},
+				{
+					"name": "210",
+					"value":"210"
+				}
+			];
+		}
+
+		return {
+			getSapotNoarHalfLengths: getSapotNoarHalfLengths
+		}
+	}
+})();

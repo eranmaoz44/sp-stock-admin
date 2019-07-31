@@ -12,6 +12,7 @@ from products.bed import Bed
 from products.bed_head import BedHead
 from products.mattress import Mattress
 from products.polyron_bed import PolyronBed
+from products.youth_couch import YouthCouch
 from settings import sqlite3_db_file_path
 
 application = Flask(__name__)
@@ -106,19 +107,6 @@ def get_bed_price(model):
     return Response(status=200, response=str(price))
 
 
-@application.route('/api/polyron_bed/<model>', methods=['GET'])
-def get_polyron_bed_price(model):
-    width = request.args.get('width')
-    length = request.args.get('length')
-    head_height = request.args.get('head_height')
-
-    bed = PolyronBed(model)
-
-    price = bed.get_price(get_db_handle(), int(width), length, int(head_height))
-
-    return Response(status=200, response=str(price))
-
-
 @application.route('/api/bed/<model>', methods=['POST'])
 def set_bed_price(model):
     width = request.args.get('width')
@@ -153,6 +141,35 @@ def set_bed_head_price(model):
     bed_head.set_price(get_db_handle(), [width_range], price)
 
     return Response(status=200)
+
+
+@application.route('/api/youth_couch/<model>', methods=['GET'])
+def get_youth_couch_price(model):
+    width = request.args.get('width')
+    length = request.args.get('length')
+    is_with_mechanism = request.args.get('is_with_mechanism')
+
+    youth_couch = YouthCouch(model)
+    price = youth_couch.get_price(get_db_handle(), [width, length, is_with_mechanism])
+
+    return Response(status=200, response=str(price))
+
+
+@application.route('/api/youth_couch/<model>', methods=['POST'])
+def set_youth_couch_price(model):
+    width = request.args.get('width')
+    length = request.args.get('length')
+    is_with_mechanism = request.args.get('is_with_mechanism')
+    if is_with_mechanism is None:
+        is_with_mechanism = 'false'
+    price = request.get_json()['price']
+    youth_couch = YouthCouch(model)
+
+    youth_couch.set_price(get_db_handle(), [width, length, is_with_mechanism], price)
+
+    return Response(status=200)
+
+
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
