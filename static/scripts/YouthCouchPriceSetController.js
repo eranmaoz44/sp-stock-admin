@@ -8,7 +8,7 @@
 		.module('spStockAdminApp')
 		.controller('YouthCouchPriceSetController', YouthCouchPriceSetController, ['$http', '$scope']);
 
-		function YouthCouchPriceSetController(youth_couch, width, length, $http, $scope) {
+		function YouthCouchPriceSetController(youth_couch, width, length, sapot_noar_polynoa_width, $http, $scope) {
 
 			var vm = this;
 
@@ -48,8 +48,10 @@
                             res =  width.getWidths()
                         else if (scope.model.youth_couch.includes('polykal'))
                             res = width.getWidths().filter(x => parseInt(x['value']) <= 90)
-                         else if (scope.model.youth_couch.includes('half'))
+                        else if (scope.model.youth_couch.includes('half'))
                             res = width.getWidths().filter(x => parseInt(x['value']) == 120)
+                        else if (scope.model.youth_couch.includes('polynoa'))
+                            res = sapot_noar_polynoa_width.getSapotNoarPolynoaWidths()
                         return res
                      }
                 },
@@ -71,9 +73,10 @@
                             res = length.getLengths()
                         else if (scope.model.youth_couch.includes('polykal'))
                             res = length.getLengths()
-                        else if (scope.model.youth_couch.includes('half')){
+                        else if (scope.model.youth_couch.includes('half'))
                             res = length.getLengths().filter(x => parseInt(x['value']) == 200)
-                         }
+                        else if (scope.model.youth_couch.includes('polynoa'))
+                            res = lemgth.getLengths()
                         return res
                         }
                     },
@@ -102,6 +105,8 @@
                             res = false
                         else if (scope.model.youth_couch.includes('half'))
                             res = false
+                        else if (scope.model.youth_couch.includes('polynoa'))
+                            res = true
                         return res
                     }
 				},

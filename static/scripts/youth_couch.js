@@ -41,8 +41,13 @@
 					"group":"פולירון וחצי"
 				},
 				{
-				    "name": "ענפה",
+				    "name": "אנפה (כולל שלוש כריות)",
 				    "value": "polyron_sapot_noar_polynoa_anafa",
+				    "group": "פולינוע"
+				},
+				{
+				    "name": "דרור",
+				    "value": "polyron_sapot_noar_polynoa_dror",
 				    "group": "פולינוע"
 				}
             ];

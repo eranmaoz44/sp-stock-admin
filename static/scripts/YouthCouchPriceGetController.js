@@ -8,7 +8,7 @@
 		.module('spStockAdminApp')
 		.controller('YouthCouchPriceGetController', YouthCouchPriceGetController, ['$http', '$scope']);
 
-		function YouthCouchPriceGetController(youth_couch, width, length, sapot_noar_half_width, sapot_noar_half_length, $http, $scope) {
+		function YouthCouchPriceGetController(youth_couch, width, length, sapot_noar_half_width, sapot_noar_half_length, sapot_noar_polynoa_width, $http, $scope) {
 
 			var vm = this;
 
@@ -44,6 +44,8 @@
                             res = width.getWidths().filter(x => parseInt(x['value']) <= 90)
                         else if (scope.model.youth_couch.includes('half'))
                             res = sapot_noar_half_width.getSapotNoarHalfWidths()
+                        else if (scope.model.youth_couch.includes('polynoa'))
+                            res = sapot_noar_polynoa_width.getSapotNoarPolynoaWidths()
                         return res
                      }
                 },
@@ -67,6 +69,8 @@
                             if (scope.model.youth_couch.includes('dia'))
                                 res = res.filter(x => parseInt(x['value']) > 180)
                          }
+                         else if (scope.model.youth_couch.includes('polynoa'))
+                            res = length.getLengths()
                         return res
                         }
                      },
@@ -93,6 +97,8 @@
                             res = false
                         else if (scope.model.youth_couch.includes('half'))
                             res = false
+                        else if (scope.model.youth_couch.includes('polynoa'))
+                            res = true
                         return res
                     }
 				}
