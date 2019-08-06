@@ -11,10 +11,6 @@
 		function getSapotNoarHalfWidths() {
 			return [
 				{
-					"name": "80",
-					"value":"80"
-				},
-				{
 					"name": "100",
 					"value":"100"
 				},

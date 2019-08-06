@@ -13,6 +13,7 @@ from products.bed_head import BedHead
 from products.mattress import Mattress
 from products.polyron_bed import PolyronBed
 from products.youth_couch import YouthCouch
+from products.polyron_youth_couch import PolyronYouthCouch
 from settings import sqlite3_db_file_path
 
 application = Flask(__name__)
@@ -148,9 +149,17 @@ def get_youth_couch_price(model):
     width = request.args.get('width')
     length = request.args.get('length')
     is_with_mechanism = request.args.get('is_with_mechanism')
+    if is_with_mechanism is None:
+        is_with_mechanism = 'false'
+    # Polyron beds require special treatment
+    if 'polyron' in model:
+        youth_couch = PolyronYouthCouch(model)
+        specification = [width, length, is_with_mechanism]
+    else:
+        youth_couch = YouthCouch(model)
+        specification = [width, length, is_with_mechanism]
 
-    youth_couch = YouthCouch(model)
-    price = youth_couch.get_price(get_db_handle(), [width, length, is_with_mechanism])
+    price = youth_couch.get_price(get_db_handle(), specification)
 
     return Response(status=200, response=str(price))
 
