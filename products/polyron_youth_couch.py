@@ -3,7 +3,9 @@ from products.youth_couch import YouthCouch
 
 class PolyronYouthCouch(YouthCouch):
     _polyron_and_a_half = 'half'
+    _polyron_spolyron = 'spolyron'
     _polyron_and_a_half_standard_specification = ['120', '200']
+    _spolyron_standard_height = 200
 
     def __init__(self, name):
         super(PolyronYouthCouch, self).__init__(name)
@@ -27,6 +29,8 @@ class PolyronYouthCouch(YouthCouch):
         if self._polyron_and_a_half in super().get_name():
             standard_price = super().get_price(db_handle, self._polyron_and_a_half_standard_specification + [is_with_mechanism])
             price = round(standard_price * self._get_half_size_price_multiplier(int(width), int(length)))
+        elif self._polyron_spolyron in super().get_name():
+            price = super().get_price(db_handle, [width, self._spolyron_standard_height, is_with_mechanism])
         else:
             price = super().get_price(db_handle, specification)
 

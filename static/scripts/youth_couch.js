@@ -49,6 +49,11 @@
 				    "name": "דרור",
 				    "value": "polyron_sapot_noar_polynoa_dror",
 				    "group": "פולינוע"
+				},
+				{
+				    "name": "סנונית / זמיר / צוקית(עם רגל עץ מבוק)",
+				    "value": "polyron_sapot_noar_spolyron",
+				    "group": "ספולירון"
 				}
             ];
 		}

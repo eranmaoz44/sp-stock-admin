@@ -8,7 +8,7 @@
 		.module('spStockAdminApp')
 		.controller('YouthCouchPriceSetController', YouthCouchPriceSetController, ['$http', '$scope']);
 
-		function YouthCouchPriceSetController(youth_couch, width, length, sapot_noar_polynoa_width, $http, $scope) {
+		function YouthCouchPriceSetController(youth_couch, width, length, sapot_noar_polynoa_width, sapot_noar_spolyron_width, $http, $scope) {
 
 			var vm = this;
 
@@ -52,6 +52,8 @@
                             res = width.getWidths().filter(x => parseInt(x['value']) == 120)
                         else if (scope.model.youth_couch.includes('polynoa'))
                             res = sapot_noar_polynoa_width.getSapotNoarPolynoaWidths()
+                        else if (scope.model.youth_couch.includes('spolyron'))
+                            res = sapot_noar_spolyron_width.getSapotNoarSpolyronWidths()
                         return res
                      }
                 },
@@ -76,7 +78,9 @@
                         else if (scope.model.youth_couch.includes('half'))
                             res = length.getLengths().filter(x => parseInt(x['value']) == 200)
                         else if (scope.model.youth_couch.includes('polynoa'))
-                            res = lemgth.getLengths()
+                            res = length.getLengths()
+                        else if (scope.model.youth_couch.includes('spolyron'))
+                            res = length.getLengths().filter(x => parseInt(x['value']) == 200)
                         return res
                         }
                     },
@@ -106,6 +110,8 @@
                         else if (scope.model.youth_couch.includes('half'))
                             res = false
                         else if (scope.model.youth_couch.includes('polynoa'))
+                            res = true
+                        else if (scope.model.youth_couch.includes('spolyron'))
                             res = true
                         return res
                     }
