@@ -65,5 +65,5 @@ def update_prices(server, curr_discount, new_discount):
                       .format(model, width, length, old_price, new_price))
 
 
-update_prices(local_server, 0.9, 0.855)
+update_prices(local_server, 0.855, 0.8)
 
