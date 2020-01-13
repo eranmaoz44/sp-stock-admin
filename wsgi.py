@@ -99,8 +99,15 @@ def get_bed_price(model):
         head_height = request.args.get('head_height')
         if head_height is None:
             head_height = 0
+        is_jewish_bed = request.args.get('is_jewish_bed')
+        if is_jewish_bed is None:
+            is_jewish_bed = 'false'
+        if is_jewish_bed.lower() == 'true':
+            is_jewish_bed = True
+        else:
+            is_jewish_bed = False
         bed = PolyronBed(model)
-        price = bed.get_price(get_db_handle(), int(width), length, int(head_height))
+        price = bed.get_price(get_db_handle(), int(width), length, int(head_height), is_jewish_bed)
     else:
         bed = Bed(model)
         price = bed.get_price(get_db_handle(), [width, length])

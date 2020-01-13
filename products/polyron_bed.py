@@ -5,6 +5,7 @@ from products.bed_head import BedHead
 class PolyronBed(Bed):
     _bed_head_name = 'polyron_bed_head'
     _shoam_sapir_name = 'polyron_shoam_sapir'
+    _inbar_name = 'polyron_shoam_sapir_inbar'
 
     def __init__(self, name):
         super(PolyronBed, self).__init__(name)
@@ -35,7 +36,7 @@ class PolyronBed(Bed):
 
         return round(normal_head_price * height_multiplier)
 
-    def get_price(self, db_handle, width, length, head_height):
+    def get_price(self, db_handle, width, length, head_height, is_jewish_bed):
         bed_price = super().get_price(db_handle, [width, length])
         if head_height != 0:
             head_price = self._get_head_price(db_handle, width, head_height)
@@ -44,4 +45,12 @@ class PolyronBed(Bed):
         else:
             head_price = 0
 
-        return bed_price + head_price
+        if is_jewish_bed:
+            if super().get_name() == self._shoam_sapir_name or super().get_name() == self._inbar_name:
+                bed_price = round(bed_price * 1.3)
+            else:
+                bed_price = round(bed_price * 1.2)
+
+        res = bed_price + head_price
+
+        return res

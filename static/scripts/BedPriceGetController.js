@@ -77,6 +77,13 @@
         ngModelElAttrs: {
             "ng-init": "model.bed_head_height=0"
         }
+      },
+      {
+        "key": "is_jewish_bed",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "הפרדה יהודית"
+        }
       }
 
 
@@ -92,7 +99,8 @@
 	                params : {
 	            			'width': vm.bedPriceGetForm.width,
 	            			'length': vm.bedPriceGetForm.length,
-	            			'head_height': vm.bedPriceGetForm.bed_head_height
+	            			'head_height': vm.bedPriceGetForm.bed_head_height,
+	            			'is_jewish_bed': vm.bedPriceGetForm.is_jewish_bed
 	                }
 	            }
 
