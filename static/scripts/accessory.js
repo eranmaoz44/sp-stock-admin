@@ -19,7 +19,11 @@
 					"value":"pillow_visco_mold"
 				},
 				{
-					"name": "כרית פוזישן",
+				    "name": "כרית לטקס פולירון",
+				    "value" : "pillow_polyron_latex"
+				},
+				{
+					"name": "כרית פולירון פוזישן",
 					"value":"pillow_position"
 				},
 								{
@@ -27,8 +31,16 @@
 					"value":"protector_default"
 				},
 				{
-					"name": "מגן מזרן פולירון",
-					"value":"protector_polyron"
+					"name": "מגן מזרן פולירון עד רוחב 90",
+					"value":"protector_polyron_90"
+				},
+								{
+					"name": "מגן מזרן פולירון עד רוחב 140",
+					"value":"protector_polyron_140"
+				},
+								{
+					"name": "מגן מזרן פולירון עד רוחב 180",
+					"value":"protector_polyron_180"
 				}
 			];
 		}
