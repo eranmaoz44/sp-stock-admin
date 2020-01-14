@@ -91,7 +91,7 @@
 				        label: 'עם מנגנון הרמת ראש'
 				    },
 				    ngModelElAttrs: {
-                        "ng-init": "model.is_with_mechanism=false"
+                        "ng-init": "model.is_with_mechanism=true"
                     },
                     hideExpression: function(viewValue, modelValue, scope) {
                         var res =  true
