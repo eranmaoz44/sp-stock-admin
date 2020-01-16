@@ -43,3 +43,8 @@ tabset{
   font-size: 30;
   font-weight: 700;
 }
+
+.checkbox input[type=checkbox]{
+    position: relative;
+    margin-left: 0px;
+}
