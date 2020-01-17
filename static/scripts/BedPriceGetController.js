@@ -107,6 +107,8 @@
                         res = false
                     else if (scope.model.bed.includes('sleep_depot'))
                         res = false
+                    else
+                        scope.model.is_buying_mattress = false
                     return res
                 }
               }
