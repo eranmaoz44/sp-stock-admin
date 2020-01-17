@@ -82,8 +82,29 @@
 		          			}
 		          		}
 		          	}
-				}
-
+				},
+                  {
+                    "key": "is_buying_mattress",
+                    "type": "checkbox",
+                    "templateOptions": {
+                      "label": "מחיר ברכישת מזרן"
+                    },
+				    ngModelElAttrs: {
+                        "ng-init": "model.is_buying_mattress=false"
+                    },
+                    hideExpression: function(viewValue, modelValue, scope) {
+                        var res =  true
+                        if (typeof scope.model.bed === 'undefined' || scope.model.bed === null)
+                            res = true
+                        else if (scope.model.bed.includes('polyron_base'))
+                            res = false
+                        else if (scope.model.bed.includes('polyron_gal'))
+                            res = false
+                        else if (scope.model.bed.includes('sleep_depot'))
+                            res = false
+                        return res
+                    }
+                  }
 			];
 
 			function validatePrice(value) {
@@ -100,7 +121,9 @@
 	                },
 	                params : {
 	            			'width': vm.rental.width,
-	            			'length': vm.rental.length
+	            			'length': vm.rental.length,
+	            			'is_buying_mattress': vm.rental.is_buying_mattress
+
 	                }
 	            }
 

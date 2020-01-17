@@ -25,6 +25,7 @@ def index():
     print(os.getcwd())
     return flask.send_file('templates/index.html', mimetype='text.html')
 
+
 @application.route('/tabset.html')
 def tabset():
     return flask.render_template('tabset.html')
@@ -93,37 +94,47 @@ def set_accessory_price(name):
 def get_bed_price(model):
     width = request.args.get('width')
     length = request.args.get('length')
+    is_buying_mattress = request.args.get('is_buying_mattress')
+
+    specification = [width, length, is_buying_mattress]
 
     # Polyron beds require special treatment
     if 'polyron' in model:
-        head_height = request.args.get('head_height')
-        if head_height is None:
-            head_height = 0
-        is_jewish_bed = request.args.get('is_jewish_bed')
-        if is_jewish_bed is None:
-            is_jewish_bed = 'false'
-        if is_jewish_bed.lower() == 'true':
-            is_jewish_bed = True
-        else:
-            is_jewish_bed = False
-        bed = PolyronBed(model)
-        price = bed.get_price(get_db_handle(), int(width), length, int(head_height), is_jewish_bed)
+        head_height, is_jewish_bed = extract_polyron_bed_params_from_request()
+        bed = PolyronBed(model, head_height, is_jewish_bed)
     else:
         bed = Bed(model)
-        price = bed.get_price(get_db_handle(), [width, length])
+    price = bed.get_price(get_db_handle(), specification)
 
     return Response(status=200, response=str(price))
+
+
+def extract_polyron_bed_params_from_request():
+    head_height = request.args.get('head_height')
+    if head_height is None:
+        head_height = 0
+    else:
+        head_height = int(head_height)
+    is_jewish_bed = request.args.get('is_jewish_bed')
+    if is_jewish_bed is None:
+        is_jewish_bed = 'false'
+    if is_jewish_bed.lower() == 'true':
+        is_jewish_bed = True
+    else:
+        is_jewish_bed = False
+    return head_height, is_jewish_bed
 
 
 @application.route('/api/bed/<model>', methods=['POST'])
 def set_bed_price(model):
     width = request.args.get('width')
     length = request.args.get('length')
+    is_buying_mattress = request.args.get('is_buying_mattress')
 
     price = request.get_json()['price']
     bed = Bed(model)
 
-    bed.set_price(get_db_handle(), [width, length], price)
+    bed.set_price(get_db_handle(), [width, length, is_buying_mattress], price)
 
     return Response(status=200)
 
@@ -184,7 +195,6 @@ def set_youth_couch_price(model):
     youth_couch.set_price(get_db_handle(), [width, length, is_with_mechanism], price)
 
     return Response(status=200)
-
 
 
 if __name__ == '__main__':

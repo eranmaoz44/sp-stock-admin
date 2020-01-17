@@ -56,35 +56,61 @@
 						required: true
 					}
 				},
-        {
-        key: 'bed_head_height',
-        type: 'select',
-        expressionProperties: {
-          'templateOptions.placeholder': function(viewValue, modelValue, scope) {
-               if (typeof scope.model.bed === "undefined" || !(scope.model.bed.startsWith('polyron_shoam') || scope.model.bed.startsWith('polyron_turkiz'))){
-                    scope.model.bed_head_height = 0
-               }
-          }
-        },
-        hideExpression: function($viewValue, $modelValue, scope) {
-				  return typeof scope.model.bed === "undefined" || !(scope.model.bed.startsWith('polyron_shoam') || scope.model.bed.startsWith('polyron_turkiz'))
-				},
-        templateOptions: {
-          label: 'גובה ראש מיטה',
-          options: bed_head_height.getBedHeadHeights(),
-          required: true
-        },
-        ngModelElAttrs: {
-            "ng-init": "model.bed_head_height=0"
-        }
-      },
-      {
-        "key": "is_jewish_bed",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "הפרדה יהודית"
-        }
-      }
+                {
+                key: 'bed_head_height',
+                type: 'select',
+                expressionProperties: {
+                  'templateOptions.placeholder': function(viewValue, modelValue, scope) {
+                       if (typeof scope.model.bed === "undefined" || !(scope.model.bed.startsWith('polyron_shoam') || scope.model.bed.startsWith('polyron_turkiz'))){
+                            scope.model.bed_head_height = 0
+                       }
+                  }
+                },
+                hideExpression: function($viewValue, $modelValue, scope) {
+                          return typeof scope.model.bed === "undefined" || !(scope.model.bed.startsWith('polyron_shoam') || scope.model.bed.startsWith('polyron_turkiz'))
+                        },
+                templateOptions: {
+                  label: 'גובה ראש מיטה',
+                  options: bed_head_height.getBedHeadHeights(),
+                  required: true
+                },
+                ngModelElAttrs: {
+                    "ng-init": "model.bed_head_height=0"
+                }
+              },
+              {
+                'key': 'is_jewish_bed',
+                'type': 'checkbox',
+                'templateOptions': {
+                  'label': 'הפרדה יהודית'
+                },
+                ngModelElAttrs: {
+                    'ng-init': 'model.is_jewish_bed=false'
+                }
+              },
+              {
+                'key': 'is_buying_mattress',
+                'type': 'checkbox',
+                'templateOptions': {
+                  'label': 'מחיר ברכישת מזרן'
+                },
+                ngModelElAttrs: {
+                    'ng-init': 'model.is_buying_mattress=false'
+                },
+                hideExpression: function(viewValue, modelValue, scope) {
+                    var res =  true
+                    if (typeof scope.model.bed === 'undefined' || scope.model.bed === null)
+                        res = true
+                    else if (scope.model.bed.includes('polyron_base'))
+                        res = false
+                    else if (scope.model.bed.includes('polyron_gal'))
+                        res = false
+                    else if (scope.model.bed.includes('sleep_depot'))
+                        res = false
+                    return res
+                }
+              }
+
 
 
 			];
@@ -100,7 +126,8 @@
 	            			'width': vm.bedPriceGetForm.width,
 	            			'length': vm.bedPriceGetForm.length,
 	            			'head_height': vm.bedPriceGetForm.bed_head_height,
-	            			'is_jewish_bed': vm.bedPriceGetForm.is_jewish_bed
+	            			'is_jewish_bed': vm.bedPriceGetForm.is_jewish_bed,
+	            			'is_buying_mattress': vm.bedPriceGetForm.is_buying_mattress
 	                }
 	            }
 
