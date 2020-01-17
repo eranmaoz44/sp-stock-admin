@@ -12,6 +12,7 @@ from products.bed import Bed
 from products.bed_head import BedHead
 from products.mattress import Mattress
 from products.polyron_bed import PolyronBed
+from products.sleep_depot_bed import SleepDepotBed
 from products.youth_couch import YouthCouch
 from products.polyron_youth_couch import PolyronYouthCouch
 from settings import sqlite3_db_file_path
@@ -102,6 +103,9 @@ def get_bed_price(model):
     if 'polyron' in model:
         head_height, is_jewish_bed = extract_polyron_bed_params_from_request()
         bed = PolyronBed(model, head_height, is_jewish_bed)
+    elif 'sleep_depot' in model:
+        is_jewish_bed = extract_is_jewish_bed_param_from_request()
+        bed = SleepDepotBed(model, is_jewish_bed)
     else:
         bed = Bed(model)
     price = bed.get_price(get_db_handle(), specification)
@@ -115,6 +119,11 @@ def extract_polyron_bed_params_from_request():
         head_height = 0
     else:
         head_height = int(head_height)
+    is_jewish_bed = extract_is_jewish_bed_param_from_request()
+    return head_height, is_jewish_bed
+
+
+def extract_is_jewish_bed_param_from_request():
     is_jewish_bed = request.args.get('is_jewish_bed')
     if is_jewish_bed is None:
         is_jewish_bed = 'false'
@@ -122,7 +131,7 @@ def extract_polyron_bed_params_from_request():
         is_jewish_bed = True
     else:
         is_jewish_bed = False
-    return head_height, is_jewish_bed
+    return is_jewish_bed
 
 
 @application.route('/api/bed/<model>', methods=['POST'])
