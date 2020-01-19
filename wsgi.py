@@ -102,7 +102,7 @@ def get_bed_price(model):
     # Polyron beds require special treatment
     if 'polyron' in model:
         head_height, is_jewish_bed = extract_polyron_bed_params_from_request()
-        bed = PolyronBed(model, head_height, is_jewish_bed)
+        bed = PolyronBed(model, head_height, is_jewish_bed, True if is_buying_mattress.lower() == 'true' else False)
     elif 'sleep_depot' in model:
         is_jewish_bed = extract_is_jewish_bed_param_from_request()
         bed = SleepDepotBed(model, is_jewish_bed)

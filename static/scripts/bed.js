@@ -33,6 +33,14 @@
                 {
 					"name": "מיטת סליפ דיפוט  /  ווינדוס",
 					"value":"sleep_depot_windows"
+				},
+                {
+					"name": "בסיס עץ סליפ דיפו",
+					"value":"sleep_depot_regular_base"
+				},
+				{
+				    "name": "מיטת סליפ דיפו חדשה עם רגליים קוניות בחזית (ראש לבחירה)",
+					"value":"sleep_depot_new"
 				}
             ];
 		}

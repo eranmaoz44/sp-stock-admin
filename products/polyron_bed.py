@@ -6,13 +6,16 @@ class PolyronBed(Bed):
     _bed_head_name = 'polyron_bed_head'
     _shoam_sapir_name = 'polyron_shoam_sapir'
     _inbar_name = 'polyron_shoam_sapir_inbar'
+    _regular_base = 'polyron_base'
+    _gal_base = 'polyron_gal'
     _width_index_in_specification = 0
 
-    def __init__(self, name, head_height, is_jewish_bed):
+    def __init__(self, name, head_height, is_jewish_bed, is_buying_mattress):
         super(PolyronBed, self).__init__(name)
         self.bed_head = BedHead(self._bed_head_name)
         self.head_height = head_height
         self.is_jewish_bed = is_jewish_bed
+        self.is_buying_mattress = is_buying_mattress
 
     def _get_head_height_price_multiplier(self, head_height):
         if head_height <= 110:
@@ -56,6 +59,11 @@ class PolyronBed(Bed):
         if self.is_jewish_bed:
             if super().get_name() == self._shoam_sapir_name or super().get_name() == self._inbar_name:
                 bed_price = round(bed_price * 1.3)
+            elif super().get_name() == self._regular_base or super().get_name() == self._gal_base:
+                if self.is_buying_mattress:
+                    bed_price = round(bed_price * 1.7)
+                else:
+                    bed_price = round(bed_price * 1.3)
             else:
                 bed_price = round(bed_price * 1.2)
 
