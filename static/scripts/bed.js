@@ -35,11 +35,27 @@
 					"value":"sleep_depot_windows"
 				},
                 {
-					"name": "בסיס עץ סליפ דיפו",
+					"name": "בסיס עץ סליפ דיפו (רגליים נסתרות)",
 					"value":"sleep_depot_regular_base"
 				},
 				{
+					"name": "בסיס עץ סליפ דיפו עם מסגרת (רגליים נסתרות)",
+					"value":"sleep_depot_regular_base_framed"
+				},
+				{
+					"name": "בסיס עץ סליפ דיפו עם רגליים קוניות (4 רגליים קוניות)",
+					"value":"sleep_depot_regular_base_conical_legs"
+				},
+				{
+					"name": "בסיס עץ סליפ דיפו עם מסגרת עם רגליים קוניות (4 רגליים קוניות)",
+					"value":"sleep_depot_regular_base_framed_conical_legs"
+				},
+				{
 				    "name": "מיטת סליפ דיפו חדשה עם רגליים קוניות בחזית (ראש לבחירה)",
+					"value":"sleep_depot_new"
+				},
+				{
+				    "name": "מיטת סליפ דיפו חדשה עם מסגרת עם רגליים קוניות בחזית (ראש לבחירה)",
 					"value":"sleep_depot_new"
 				}
             ];
