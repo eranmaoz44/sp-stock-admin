@@ -86,7 +86,21 @@
                 },
                 ngModelElAttrs: {
                     'ng-init': 'model.is_jewish_bed=false'
-                }
+                },
+                 hideExpression: function(viewValue, modelValue, scope) {
+                        var res =  true
+                        if (typeof scope.model.bed === 'undefined' || scope.model.bed === null)
+                            res = true
+                        else if (scope.model.width === 'undefined' || scope.model.width === null)
+                            res = true
+                        else if (scope.model.length === 'undefined' || scope.model.length === null)
+                            res = true
+                        else if (parseInt(scope.model.width) >= 160)
+                            res = false
+                        else if (scope.model.bed.includes('polyron') && parseInt(scope.model.width) == 140)
+                            res = false
+                        return res
+                    }
               },
               {
                 'key': 'is_buying_mattress',
