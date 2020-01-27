@@ -65,7 +65,7 @@ def set_price(server_to_apply, product_type, model, specification_json, price):
 
 
 def transform_singular(price):
-    return price + 5
+    return price
 
 
 def copy_and_transform(server_to_apply, product_type, spec_options, model_from, model_to, transform_price):

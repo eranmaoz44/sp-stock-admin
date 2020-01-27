@@ -48,6 +48,7 @@ class PolyronBed(Bed):
         return int(specification[PolyronBed._width_index_in_specification])
 
     def get_price(self, db_handle, specification=[]):
+        specification[2] = 'false'
         bed_price = super().get_price(db_handle, specification)
         width = self._extract_width_from_specification(specification)
         if self.head_height != 0:

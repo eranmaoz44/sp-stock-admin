@@ -96,8 +96,9 @@ def get_bed_price(model):
     width = request.args.get('width')
     length = request.args.get('length')
     is_buying_mattress = request.args.get('is_buying_mattress')
+    is_jewish_bed = request.args.get('is_jewish_bed')
 
-    specification = [width, length, is_buying_mattress]
+    specification = [width, length, is_jewish_bed, is_buying_mattress]
 
     # Polyron beds require special treatment
     if 'polyron' in model:

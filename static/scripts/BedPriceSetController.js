@@ -83,6 +83,32 @@
 		          		}
 		          	}
 				},
+				{
+                'key': 'is_jewish_bed',
+                'type': 'checkbox',
+                'templateOptions': {
+                  'label': 'הפרדה יהודית'
+                },
+                ngModelElAttrs: {
+                    'ng-init': 'model.is_jewish_bed=false'
+                },
+                 hideExpression: function(viewValue, modelValue, scope) {
+                        var res =  true
+                        if (typeof scope.model.bed === 'undefined' || scope.model.bed === null)
+                            res = true
+                        else if (scope.model.width === 'undefined' || scope.model.width === null)
+                            res = true
+                        else if (scope.model.length === 'undefined' || scope.model.length === null)
+                            res = true
+                        else if (parseInt(scope.model.width) >= 160)
+                            res = false
+                        else if (scope.model.bed.includes('polyron') && parseInt(scope.model.width) == 140)
+                            res = false
+                        else
+                            scope.model.is_jewish_bed=false
+                        return res
+                    }
+                 },
                   {
                     "key": "is_buying_mattress",
                     "type": "checkbox",
@@ -124,6 +150,7 @@
 	                params : {
 	            			'width': vm.rental.width,
 	            			'length': vm.rental.length,
+	            			'is_jewish_bed': vm.rental.is_jewish_bed,
 	            			'is_buying_mattress': vm.rental.is_buying_mattress
 
 	                }
