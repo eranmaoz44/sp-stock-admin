@@ -99,6 +99,8 @@
                             res = false
                         else if (scope.model.bed.includes('polyron') && parseInt(scope.model.width) == 140)
                             res = false
+                        else
+                            scope.model.is_jewish_bed=false
                         return res
                     }
               },

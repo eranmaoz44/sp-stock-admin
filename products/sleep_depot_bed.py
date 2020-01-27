@@ -17,7 +17,7 @@ class SleepDepotBed(Bed):
             if super().get_name() == self._classic_sleep_depot:
                 bed_price = bed_price + 500
             elif super().get_name() == self._sleep_depot_regular_base:
-                bed_price = bed_price + 200
+                bed_price = bed_price + 150
             elif super().get_name() == self._sleep_depot_new:
                 bed_price = bed_price + 500
         res = bed_price
