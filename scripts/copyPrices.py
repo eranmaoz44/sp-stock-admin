@@ -10,6 +10,13 @@ lengths = ('length', ['190', '200'])
 
 is_buying_mattress = ('is_buying_mattress', ['true', 'false'])
 
+is_buying_mattress_false = ('is_buying_mattress', ['false'])
+
+
+is_jewish_bed = ('is_jewish_bed', ['true', 'false'])
+
+is_jewish_bed_false = ('is_jewish_bed', ['false'])
+
 
 def get_price(server_to_apply, product_type, model, specification_json):
     curr_url = server_to_apply + '/api/{0}/{1}'.format(product_type, model)
@@ -78,9 +85,50 @@ def copy_and_transform(server_to_apply, product_type, spec_options, model_from, 
         print('')
 
 
+def update_is_jewish_bed_prices_for_polyron_beds():
+    for option_set in get_json_spec_options([is_buying_mattress_false, is_jewish_bed_false, lengths, widths]):
+        model = 'polyron_shoam_sapir_inbar'
+        price_from = get_price(server, 'bed', model, option_set)
+        print('from {0} {1} {2}'.format(model, option_set, price_from))
+        option_set['is_buying_mattress'] = 'true'
+        price_is_buying_mattress = int(price_from * 0.75)
+        print('is_buying_mattress {0} {1} {2}'.format(model, option_set, price_is_buying_mattress))
+        set_price(server, 'bed', model, option_set, price_is_buying_mattress)
+        option_set['is_jewish_bed'] = 'true'
+        price_is_buying_is_jewish = int(price_from * 0.75 * 1.3)
+        print('is_buying_mattress is_jewish {0} {1} {2}'.format(model, option_set, price_is_buying_is_jewish))
+        set_price(server, 'bed', model, option_set, price_is_buying_is_jewish)
+        option_set['is_buying_mattress'] = 'false'
+        price_is_jewish = int(price_from * 1.3)
+        print('is_buying_mattress is_jewish {0} {1} {2}'.format(model, option_set, price_is_jewish))
+        set_price(server, 'bed', model, option_set, price_is_jewish)
+        print('')
+
+
+def update_is_jewish_bed_prices_for_polyron_beds_shoam():
+    for option_set in get_json_spec_options([is_buying_mattress_false, is_jewish_bed_false, lengths, widths]):
+        model = 'polyron_shoam_sapir'
+        price_from = get_price(server, 'bed', model, option_set)
+        print('from {0} {1} {2}'.format(model, option_set, price_from))
+        option_set['is_buying_mattress'] = 'true'
+        price_is_buying_mattress = int(price_from * 0.75)
+        print('is_buying_mattress {0} {1} {2}'.format(model, option_set, price_is_buying_mattress))
+        set_price(server, 'bed', model, option_set, price_is_buying_mattress)
+        option_set['is_jewish_bed'] = 'true'
+        price_is_buying_is_jewish = int(price_from * 0.75 * 1.3)
+        print('is_buying_mattress is_jewish {0} {1} {2}'.format(model, option_set, price_is_buying_is_jewish))
+        set_price(server, 'bed', model, option_set, price_is_buying_is_jewish)
+        option_set['is_buying_mattress'] = 'false'
+        price_is_jewish = int(price_from * 1.3)
+        print('is_buying_mattress is_jewish {0} {1} {2}'.format(model, option_set, price_is_jewish))
+        set_price(server, 'bed', model, option_set, price_is_jewish)
+        print('')
+
+
+
 def copy_and_transform_bed_prices_singular():
     copy_and_transform(server, 'bed', get_singular_beds_spec_options(), 'sleep_depot_regular_base', 'sleep_depot_regular_base',
                        transform_singular)
 
 
-copy_and_transform_bed_prices_singular()
+update_is_jewish_bed_prices_for_polyron_beds_shoam()

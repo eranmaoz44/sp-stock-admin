@@ -31,7 +31,7 @@
                     "value":"polyron_gal"
                 },
                 {
-					"name": "מיטת סליפ דיפוט  /  ווינדוס",
+					"name": "מיטת סליפ דיפו  /  ווינדוס",
 					"value":"sleep_depot_windows"
 				},
                 {
@@ -56,7 +56,7 @@
 				},
 				{
 				    "name": "מיטת סליפ דיפו חדשה עם מסגרת עם רגליים קוניות בחזית (ראש לבחירה)",
-					"value":"sleep_depot_new"
+					"value":"sleep_depot_new_framed"
 				}
             ];
 		}

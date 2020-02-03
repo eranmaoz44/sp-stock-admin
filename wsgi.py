@@ -139,12 +139,13 @@ def extract_is_jewish_bed_param_from_request():
 def set_bed_price(model):
     width = request.args.get('width')
     length = request.args.get('length')
+    is_jewish_bed = request.args.get('is_jewish_bed')
     is_buying_mattress = request.args.get('is_buying_mattress')
 
     price = request.get_json()['price']
     bed = Bed(model)
 
-    bed.set_price(get_db_handle(), [width, length, is_buying_mattress], price)
+    bed.set_price(get_db_handle(), [width, length, is_jewish_bed, is_buying_mattress], price)
 
     return Response(status=200)
 
@@ -165,6 +166,7 @@ def set_bed_head_price(model):
     width_range = request.args.get('width_range')
 
     price = request.get_json()['price']
+
     bed_head = BedHead(model)
 
     bed_head.set_price(get_db_handle(), [width_range], price)

@@ -119,17 +119,17 @@
                         "ng-init": "model.is_buying_mattress=false"
                     },
                     hideExpression: function(viewValue, modelValue, scope) {
-                        var res =  true
-                        if (typeof scope.model.bed === 'undefined' || scope.model.bed === null)
-                            res = true
-                        else if (scope.model.bed.includes('polyron_base'))
-                            res = false
-                        else if (scope.model.bed.includes('polyron_gal'))
-                            res = false
-                        else if (scope.model.bed.includes('sleep_depot'))
-                            res = false
-                        else
-                            scope.model.is_buying_mattress = false
+                        var res =  false
+//                        if (typeof scope.model.bed === 'undefined' || scope.model.bed === null)
+//                            res = true
+//                        else if (scope.model.bed.includes('polyron_base'))
+//                            res = false
+//                        else if (scope.model.bed.includes('polyron_gal'))
+//                            res = false
+//                        else if (scope.model.bed.includes('sleep_depot'))
+//                            res = false
+//                        else
+//                            scope.model.is_buying_mattress = false
                         return res
                     }
                   }

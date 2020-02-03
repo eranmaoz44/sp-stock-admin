@@ -48,7 +48,6 @@ class PolyronBed(Bed):
         return int(specification[PolyronBed._width_index_in_specification])
 
     def get_price(self, db_handle, specification=[]):
-        specification[2] = 'false'
         bed_price = super().get_price(db_handle, specification)
         width = self._extract_width_from_specification(specification)
         if self.head_height != 0:
@@ -57,22 +56,24 @@ class PolyronBed(Bed):
             head_price = 300  # Shoam or sapir without head automatically needs klapa which costs 300
         else:
             head_price = 0
+        if self.is_buying_mattress:
+            head_price = round(head_price * 0.75)
 
-        if self.is_jewish_bed:
-            if super().get_name() == self._shoam_sapir_name or super().get_name() == self._inbar_name:
-                bed_price = round(bed_price * 1.3)
-            elif super().get_name() == self._regular_base:
-                if self.is_buying_mattress:
-                    bed_price = round(bed_price * 1.7)
-                else:
-                    bed_price = round(bed_price * 1.3)
-            elif super().get_name() == self._gal_base:
-                if self.is_buying_mattress:
-                    bed_price = round(bed_price * 1.7)
-                else:
-                    bed_price = round(bed_price * 1.4)
-            else:
-                bed_price = round(bed_price * 1.2)
+        # if self.is_jewish_bed:
+        #     if super().get_name() == self._shoam_sapir_name or super().get_name() == self._inbar_name:
+        #         bed_price = round(bed_price * 1.3)
+        #     elif super().get_name() == self._regular_base:
+        #         if self.is_buying_mattress:
+        #             bed_price = round(bed_price * 1.7)
+        #         else:
+        #             bed_price = round(bed_price * 1.3)
+        #     elif super().get_name() == self._gal_base:
+        #         if self.is_buying_mattress:
+        #             bed_price = round(bed_price * 1.7)
+        #         else:
+        #             bed_price = round(bed_price * 1.4)
+        #     else:
+        #         bed_price = round(bed_price * 1.2)
 
         res = bed_price + head_price
 
