@@ -13,12 +13,12 @@ class SleepDepotBed(Bed):
     def get_price(self, db_handle, specification=[]):
         bed_price = super().get_price(db_handle, specification)
 
-        if self.is_jewish_bed:
-            if super().get_name() == self._classic_sleep_depot:
-                bed_price = bed_price + 500
-            elif super().get_name() == self._sleep_depot_regular_base:
-                bed_price = bed_price + 150
-            elif super().get_name() == self._sleep_depot_new:
-                bed_price = bed_price + 500
+        # if self.is_jewish_bed:
+        #     if super().get_name() == self._classic_sleep_depot:
+        #         bed_price = bed_price + 500
+        #     elif super().get_name() == self._sleep_depot_regular_base:
+        #         bed_price = bed_price + 150
+        #     elif super().get_name() == self._sleep_depot_new:
+        #         bed_price = bed_price + 500
         res = bed_price
         return res
