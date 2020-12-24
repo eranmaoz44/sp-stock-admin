@@ -17,6 +17,12 @@ is_jewish_bed = ('is_jewish_bed', ['true', 'false'])
 
 is_jewish_bed_false = ('is_jewish_bed', ['false'])
 
+polykal_models = ['polyron_sapot_noar_polykal_one', 'polyron_sapot_noar_polykal_two']
+polykal_widths = ('width', [80,90])
+polykal_lengths = ('length', [190,200])
+polykal_db_name = 'youth_couch'
+polykal_spec = ('is_with_mechanism', ['true', 'false'])
+
 
 def get_price(server_to_apply, product_type, model, specification_json):
     curr_url = server_to_apply + '/api/{0}/{1}'.format(product_type, model)
@@ -54,6 +60,9 @@ def get_beds_spec_options():
 
 def get_singular_beds_spec_options():
     return get_json_spec_options([is_buying_mattress, lengths, singular_widths])
+
+def get_polykal_spec_options():
+    return get_json_spec_options([polykal_widths, polykal_lengths, polykal_spec])
 
 
 def set_price(server_to_apply, product_type, model, specification_json, price):
@@ -198,4 +207,12 @@ def update_is_jewish_bed_prices_for_polyron_beds_gal():
         print('')
 
 
-update_is_jewish_bed_prices_for_polyron_beds_gal()
+#update_is_jewish_bed_prices_for_polyron_beds_gal()
+
+def update_polykal_prices():
+    for model in polykal_models:
+        copy_and_transform(server, polykal_db_name, get_polykal_spec_options(), model,
+                           model,
+                           lambda x: round(x*1.075))
+
+update_polykal_prices()
