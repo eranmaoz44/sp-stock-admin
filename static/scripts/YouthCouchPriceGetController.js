@@ -119,9 +119,12 @@
 	                },
 	                params : {
 	            			'width': vm.youthCouchPriceGetForm.width,
-	            			'length': vm.youthCouchPriceGetForm.length,
-	            			'is_with_mechanism': vm.youthCouchPriceGetForm.is_with_mechanism
+	            			'length': vm.youthCouchPriceGetForm.length
 	                }
+	            }
+
+                if (vm.youthCouchPriceGetForm.youth_couch.includes('polykal') || vm.youthCouchPriceGetForm.youth_couch.includes('half') ){
+	                config['params']['is_with_mechanism'] = vm.youthCouchPriceGetForm.is_with_mechanism
 	            }
 
 
