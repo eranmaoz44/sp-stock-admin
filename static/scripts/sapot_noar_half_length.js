@@ -11,20 +11,12 @@
 		function getSapotNoarHalfLengths() {
 			return [
 				{
-					"name": "180",
-					"value":"180"
-				},
-				{
 					"name": "190",
 					"value":"190"
 				},
 				{
 					"name": "200",
 					"value":"200"
-				},
-				{
-					"name": "210",
-					"value":"210"
 				}
 			];
 		}

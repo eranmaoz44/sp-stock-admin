@@ -23,6 +23,14 @@ polykal_lengths = ('length', [190,200])
 polykal_db_name = 'youth_couch'
 polykal_spec = ('is_with_mechanism', ['true', 'false'])
 
+mita_vahetzi_models = ['polyron_sapot_noar_half_efroni_shaldag_agmit', 'polyron_sapot_noar_half_huhit_tzufit', 'polyron_sapot_noar_half_dia']
+sapot_noar_db_name = 'youth_couch'
+mita_vahetzi_spec = ('is_with_mechanism', ['true', 'false'])
+mita_vahetzi_widths = ('width', [120, 140])
+mita_vahetzi_lengths = ('length', [190,200])
+
+
+
 
 def get_price(server_to_apply, product_type, model, specification_json):
     curr_url = server_to_apply + '/api/{0}/{1}'.format(product_type, model)
@@ -63,6 +71,9 @@ def get_singular_beds_spec_options():
 
 def get_polykal_spec_options():
     return get_json_spec_options([polykal_widths, polykal_lengths, polykal_spec])
+
+def get_mita_vahetzi_spec_options():
+    return get_json_spec_options([mita_vahetzi_widths, mita_vahetzi_lengths, mita_vahetzi_spec])
 
 
 def set_price(server_to_apply, product_type, model, specification_json, price):
@@ -214,5 +225,12 @@ def update_polykal_prices():
         copy_and_transform(server, polykal_db_name, get_polykal_spec_options(), model,
                            model,
                            lambda x: round(x*1.075))
+
+def update_polykal_prices():
+    for model in mita_vahetzi_models:
+        copy_and_transform(server, sapot_noar_db_name, get_mita_vahetzi_spec_options(), model,
+                           model,
+                           lambda x: round(x*1.075))
+
 
 update_polykal_prices()
