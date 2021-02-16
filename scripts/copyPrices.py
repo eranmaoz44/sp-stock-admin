@@ -235,7 +235,7 @@ def update_is_jewish_bed_prices_for_polyron_beds_gal():
 
         print('')
 
-def update_polyron_beds_prices_jewish_is_buying():
+def update_polyron_beds_prices_jewish_is_buying_combinations():
     for model in polyron_bed_models:
         for option_set in get_json_spec_options([is_buying_mattress_false, is_jewish_bed_false, lengths, widths]):
             option_set['head_height'] = 0
@@ -251,16 +251,16 @@ def update_polyron_beds_prices_jewish_is_buying():
             option_set['is_jewish_bed'] = 'true'
             if model == 'polyron_turkiz_bareket':
                 jewish_bed_multiplier = 1.2
-                print('Turkiz/Bareket bed without storage, jewish bed multiplier = '.format(jewish_bed_multiplier))
+                print('Turkiz/Bareket bed without storage, jewish bed multiplier = {0}'.format(jewish_bed_multiplier))
             else:
                 jewish_bed_multiplier = 1.3
-                print('Inbar/Shoam bed with storage, jewish bed multiplier = '.format(jewish_bed_multiplier))
+                print('Inbar/Shoam bed with storage, jewish bed multiplier = {0}'.format(jewish_bed_multiplier))
             price_is_buying_is_jewish = int(price_from * 0.75 * jewish_bed_multiplier)
             print('is_buying_mattress is_jewish {0} {1} {2}'.format(model, option_set, price_is_buying_is_jewish))
             set_price(server, 'bed', model, option_set, price_is_buying_is_jewish)
             option_set['is_buying_mattress'] = 'false'
             price_is_jewish = int(price_from * jewish_bed_multiplier)
-            print('is_buying_mattress is_jewish {0} {1} {2}'.format(model, option_set, price_is_jewish))
+            print('is_jewish {0} {1} {2}'.format(model, option_set, price_is_jewish))
             set_price(server, 'bed', model, option_set, price_is_jewish)
             print('')
 
@@ -293,4 +293,4 @@ def polyron_bed_price_increase(model, price):
     return price
 
 
-update_polyron_beds_prices()
+update_polyron_beds_prices_jewish_is_buying_combinations()
