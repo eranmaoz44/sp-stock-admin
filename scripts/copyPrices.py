@@ -29,6 +29,13 @@ mita_vahetzi_spec = ('is_with_mechanism', ['true', 'false'])
 mita_vahetzi_widths = ('width', [120, 140])
 mita_vahetzi_lengths = ('length', [190,200])
 
+polyron_bed_models = ['polyron_shoam_sapir_inbar', 'polyron_shoam_sapir', 'polyron_turkiz_bareket']
+beds_db_name = 'bed'
+polyron_bed_widths = ('width', [80,90,120,140,160,180])
+polyron_bed_lengths = ('length', [190,200])
+polyron_bed_is_buying_mattress = ('is_buying_mattress', ['true', 'false'])
+polyron_bed_is_jewish_bed = ('is_jewish_bed', ['true', 'false'])
+polyron_bed_base_height = ('head_height', [0])
 
 
 
@@ -36,7 +43,11 @@ def get_price(server_to_apply, product_type, model, specification_json):
     curr_url = server_to_apply + '/api/{0}/{1}'.format(product_type, model)
     response = requests.get(url=curr_url, params=specification_json)
     price_from_server = response.text
-    return int(price_from_server)
+    if 'Not Found' in price_from_server:
+        price_from_server = None
+    else:
+        price_from_server = int(price_from_server)
+    return price_from_server
 
 
 def multiply_spec_options(spec_options):
@@ -75,6 +86,10 @@ def get_polykal_spec_options():
 def get_mita_vahetzi_spec_options():
     return get_json_spec_options([mita_vahetzi_widths, mita_vahetzi_lengths, mita_vahetzi_spec])
 
+def get_polyron_beds_spec_options():
+    return get_json_spec_options([polyron_bed_widths, polyron_bed_lengths,
+                                  polyron_bed_is_buying_mattress, polyron_bed_is_jewish_bed, polyron_bed_base_height])
+
 
 def set_price(server_to_apply, product_type, model, specification_json, price):
     full_post_url = server_to_apply + '/api/{0}/{1}'.format(product_type, model)
@@ -99,7 +114,10 @@ def copy_and_transform(server_to_apply, product_type, spec_options, model_from, 
     for option_set in spec_options:
         price_from = get_price(server_to_apply, product_type, model_from, option_set)
         print('from {0} {1} {2}'.format(model_from, option_set, price_from))
-        price_to_transformed = transform_price(price_from)
+        if not price_from:
+            print('Price from not found, continuing to the next specifications')
+            continue
+        price_to_transformed = transform_price(model_from, price_from)
         set_price(server_to_apply, product_type, model_to, option_set, price_to_transformed)
         print('to {0} {1} {2}'.format(model_to, option_set, price_to_transformed))
         print('')
@@ -217,6 +235,36 @@ def update_is_jewish_bed_prices_for_polyron_beds_gal():
 
         print('')
 
+def update_polyron_beds_prices_jewish_is_buying():
+    for model in polyron_bed_models:
+        for option_set in get_json_spec_options([is_buying_mattress_false, is_jewish_bed_false, lengths, widths]):
+            option_set['head_height'] = 0
+            price_from = get_price(server, 'bed', model, option_set)
+            print('from {0} {1} {2}'.format(model, option_set, price_from))
+            if model == 'polyron_shoam_sapir':
+                price_from = price_from - 300
+                print('Model is Shoam/Turkiz with Klapa, removing 300 from price --> {0}'.format(price_from))
+            option_set['is_buying_mattress'] = 'true'
+            price_is_buying_mattress = int(price_from * 0.75)
+            print('is_buying_mattress {0} {1} {2}'.format(model, option_set, price_is_buying_mattress))
+            set_price(server, 'bed', model, option_set, price_is_buying_mattress)
+            option_set['is_jewish_bed'] = 'true'
+            if model == 'polyron_turkiz_bareket':
+                jewish_bed_multiplier = 1.2
+                print('Turkiz/Bareket bed without storage, jewish bed multiplier = '.format(jewish_bed_multiplier))
+            else:
+                jewish_bed_multiplier = 1.3
+                print('Inbar/Shoam bed with storage, jewish bed multiplier = '.format(jewish_bed_multiplier))
+            price_is_buying_is_jewish = int(price_from * 0.75 * jewish_bed_multiplier)
+            print('is_buying_mattress is_jewish {0} {1} {2}'.format(model, option_set, price_is_buying_is_jewish))
+            set_price(server, 'bed', model, option_set, price_is_buying_is_jewish)
+            option_set['is_buying_mattress'] = 'false'
+            price_is_jewish = int(price_from * jewish_bed_multiplier)
+            print('is_buying_mattress is_jewish {0} {1} {2}'.format(model, option_set, price_is_jewish))
+            set_price(server, 'bed', model, option_set, price_is_jewish)
+            print('')
+
+
 
 #update_is_jewish_bed_prices_for_polyron_beds_gal()
 
@@ -226,11 +274,23 @@ def update_polykal_prices():
                            model,
                            lambda x: round(x*1.075))
 
-def update_polykal_prices():
+def update_mita_vahetzi_prices():
     for model in mita_vahetzi_models:
         copy_and_transform(server, sapot_noar_db_name, get_mita_vahetzi_spec_options(), model,
                            model,
                            lambda x: round(x*1.075))
 
+def update_polyron_beds_prices():
+    for model in polyron_bed_models:
+        copy_and_transform(server, beds_db_name, get_polyron_beds_spec_options(), model,
+                           model,
+                           polyron_bed_price_increase)
 
-update_polykal_prices()
+def polyron_bed_price_increase(model, price):
+    if model == 'polyron_shoam_sapir':
+        price = price - 300 # remove klapa from price calculation
+    price = round(price * 1.075)
+    return price
+
+
+update_polyron_beds_prices()

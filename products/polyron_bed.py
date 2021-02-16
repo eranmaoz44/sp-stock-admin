@@ -22,9 +22,9 @@ class PolyronBed(Bed):
         if head_height <= 110:
             multiplier = 1.0
         elif head_height <= 120:
-            multiplier = 1.1
+            multiplier = 1.15
         else:
-            multiplier = 1.2
+            multiplier = 1.25
         return multiplier
 
     def _get_bed_width_range(self, width):
