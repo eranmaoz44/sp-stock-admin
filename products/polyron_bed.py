@@ -53,7 +53,10 @@ class PolyronBed(Bed):
         if self.head_height != 0:
             head_price = self._get_head_price(db_handle, width, self.head_height)
         elif super().get_name() == self._shoam_sapir_name:
-            head_price = 300  # Shoam or sapir without head automatically needs klapa which costs 300
+            if self.is_buying_mattress:
+                head_price = 400  # Shoam or sapir without head automatically needs klapa which costs 300
+            else:
+                head_price = 300
         else:
             head_price = 0
         if self.is_buying_mattress:

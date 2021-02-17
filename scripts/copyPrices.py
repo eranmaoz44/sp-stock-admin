@@ -37,6 +37,8 @@ polyron_bed_is_buying_mattress = ('is_buying_mattress', ['true', 'false'])
 polyron_bed_is_jewish_bed = ('is_jewish_bed', ['true', 'false'])
 polyron_bed_base_height = ('head_height', [0])
 
+polyron_bed_models_with_storage = ['polyron_shoam_sapir_inbar', 'polyron_shoam_sapir']
+
 
 
 def get_price(server_to_apply, product_type, model, specification_json):
@@ -286,11 +288,17 @@ def update_polyron_beds_prices():
                            model,
                            polyron_bed_price_increase)
 
+def update_polyron_beds_price_with_storage():
+    for model in polyron_bed_models_with_storage:
+        copy_and_transform(server, beds_db_name, get_polyron_beds_spec_options(), model,
+                           model,
+                           polyron_bed_price_increase)
+
 def polyron_bed_price_increase(model, price):
     if model == 'polyron_shoam_sapir':
         price = price - 300 # remove klapa from price calculation
-    price = round(price * 1.075)
+    price = round(price * 0.97)
     return price
 
 
-update_polyron_beds_prices_jewish_is_buying_combinations()
+update_polyron_beds_price_with_storage()
