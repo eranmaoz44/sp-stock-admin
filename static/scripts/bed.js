@@ -31,31 +31,23 @@
                     "value":"polyron_gal"
                 },
                 {
-					"name": "מיטת סליפ דיפו  /  ווינדוס",
+					"name": "LENY / SILIA / SHERIL",
 					"value":"sleep_depot_windows"
 				},
                 {
-					"name": "בסיס עץ סליפ דיפו (רגליים נסתרות)",
+					"name": "FLY",
 					"value":"sleep_depot_regular_base"
 				},
 				{
-					"name": "בסיס עץ סליפ דיפו עם מסגרת (רגליים נסתרות)",
-					"value":"sleep_depot_regular_base_framed"
-				},
-				{
-					"name": "בסיס עץ סליפ דיפו עם רגליים קוניות (4 רגליים קוניות)",
+					"name": "SPIDER / TERRY / CONNY",
 					"value":"sleep_depot_regular_base_conical_legs"
 				},
 				{
-					"name": "בסיס עץ סליפ דיפו עם מסגרת עם רגליים קוניות (4 רגליים קוניות)",
-					"value":"sleep_depot_regular_base_framed_conical_legs"
-				},
-				{
-				    "name": "מיטת סליפ דיפו חדשה עם רגליים קוניות בחזית (ראש לבחירה)",
+				    "name": "CAROL / WENDY ",
 					"value":"sleep_depot_new"
 				},
 				{
-				    "name": "מיטת סליפ דיפו חדשה עם מסגרת עם רגליים קוניות בחזית (ראש לבחירה)",
+				    "name": "EMILY / KETTY",
 					"value":"sleep_depot_new_framed"
 				}
             ];
