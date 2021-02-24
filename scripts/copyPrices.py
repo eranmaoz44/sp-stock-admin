@@ -39,6 +39,8 @@ polyron_bed_base_height = ('head_height', [0])
 
 polyron_bed_models_with_storage = ['polyron_shoam_sapir_inbar', 'polyron_shoam_sapir']
 
+polyron_wood_beds_models = ['polyron_base', 'polyron_gal']
+polyron_wood_beds_db_name = 'bed'
 
 
 def get_price(server_to_apply, product_type, model, specification_json):
@@ -91,6 +93,10 @@ def get_mita_vahetzi_spec_options():
 def get_polyron_beds_spec_options():
     return get_json_spec_options([polyron_bed_widths, polyron_bed_lengths,
                                   polyron_bed_is_buying_mattress, polyron_bed_is_jewish_bed, polyron_bed_base_height])
+
+def get_polyron_wood_beds_spec_options():
+    return get_json_spec_options([polyron_bed_widths, polyron_bed_lengths,
+                                  polyron_bed_is_buying_mattress, polyron_bed_is_jewish_bed])
 
 
 def set_price(server_to_apply, product_type, model, specification_json, price):
@@ -297,8 +303,14 @@ def update_polyron_beds_price_with_storage():
 def polyron_bed_price_increase(model, price):
     if model == 'polyron_shoam_sapir':
         price = price - 300 # remove klapa from price calculation
-    price = round(price * 0.97)
+    price = round(price * 1.075)
     return price
 
 
-update_polyron_beds_price_with_storage()
+
+
+def polyron_wood_beds_price_increase():
+    for model in polyron_wood_beds_models:
+        copy_and_transform(server, polyron_wood_beds_db_name, get_polyron_wood_beds_spec_options(), model, model, polyron_bed_price_increase)
+
+polyron_wood_beds_price_increase()
