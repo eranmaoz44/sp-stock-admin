@@ -43,11 +43,21 @@ polyron_wood_beds_models = ['polyron_base', 'polyron_gal']
 polyron_wood_beds_db_name = 'bed'
 
 
+
+sleepdepot_base_models = ["sleep_depot_windows","sleep_depot_regular_base", "sleep_depot_regular_base_conical_legs",
+                          "sleep_depot_new", "sleep_depot_new_framed"]
+beds_db_name = 'bed'
+sleepdepot_base_widths = ('width', [80,90,120,140,160,180])
+sleepdepot_base_lengths = ('length', [190,200])
+sleepdepot_base_is_buying_mattress = ('is_buying_mattress', ['false', 'true'])
+sleepdepot_base_is_jewish_bed = ('is_jewish_bed', ['false', 'true'])
+
+
 def get_price(server_to_apply, product_type, model, specification_json):
     curr_url = server_to_apply + '/api/{0}/{1}'.format(product_type, model)
     response = requests.get(url=curr_url, params=specification_json)
     price_from_server = response.text
-    if 'Not Found' in price_from_server:
+    if price_from_server == 'None' or 'Not Found' in price_from_server:
         price_from_server = None
     else:
         price_from_server = int(price_from_server)
@@ -97,6 +107,9 @@ def get_polyron_beds_spec_options():
 def get_polyron_wood_beds_spec_options():
     return get_json_spec_options([polyron_bed_widths, polyron_bed_lengths,
                                   polyron_bed_is_buying_mattress, polyron_bed_is_jewish_bed])
+
+def get_sleep_depot_beds_spec_options():
+    return get_json_spec_options([sleepdepot_base_widths, sleepdepot_base_lengths, sleepdepot_base_is_buying_mattress, sleepdepot_base_is_jewish_bed])
 
 
 def set_price(server_to_apply, product_type, model, specification_json, price):
@@ -307,10 +320,21 @@ def polyron_bed_price_increase(model, price):
     return price
 
 
-
-
 def polyron_wood_beds_price_increase():
     for model in polyron_wood_beds_models:
         copy_and_transform(server, polyron_wood_beds_db_name, get_polyron_wood_beds_spec_options(), model, model, polyron_bed_price_increase)
 
-polyron_wood_beds_price_increase()
+
+def sleep_depot_bed_price_increase(model, x):
+    return x + 100
+
+
+def update_sleep_depot_beds():
+    for model in sleepdepot_base_models:
+        copy_and_transform(server, beds_db_name, get_polyron_beds_spec_options(), model,
+                           model,
+                           sleep_depot_bed_price_increase)
+
+
+
+update_sleep_depot_beds()
