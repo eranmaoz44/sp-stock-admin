@@ -19,8 +19,8 @@
 					"value":"polyflex_turkiz_with_classic"
 				},
 				{
-					"name": "סט פוליפלקס עם רגליים ללא מיטה + מזרני קלאסיק",
-					"value":"polyflex_with_legs_no_bed_with_classic"
+					"name": "סט פוליפלקס ללא רגליים ללא מיטה + מזרני קלאסיק",
+					"value":"polyflex_without_legs_no_bed_with_classic"
 				}
             ];
 		}

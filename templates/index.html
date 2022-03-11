@@ -29,6 +29,7 @@
     <script src="static\scripts\sapot_noar_spolyron_width.js"></script>
     <script src="static\scripts\sapot_noar_half_length.js"></script>
     <script src="static\scripts\width.js"></script>
+    <script src="static\scripts\width_adj.js"></script>
     <script src="static\scripts\length.js"></script>
     <script src="static\scripts\accessory.js"></script>
     <script src="static\scripts\bed.js"></script>
@@ -38,6 +39,7 @@
     <script src="static\scripts\youth_couch.js"></script>
     <script src="static\scripts\adjustable.js"></script>
     <script src="static\scripts\AdjustablePriceGetController.js"></script>
+    <script src="static\scripts\AdjustablePriceSetController.js"></script>
     <meta charset=utf-8>
 </head>
 <body ng-app="spStockAdminApp">
@@ -260,10 +262,36 @@
                                 </div>
                                 <br>
                             </div>
-                            <h4>** !</h4>
+                                                                                    <h4>
+<ul><li>בגדלים 120,140 מגיע עם מנגנון בודד</li>
+                           <li> סט רגליים למנגנון בעלות 250 ש"ח בוק תואם לצבע המנגנון - עבור מנגנון אחד בלבד (כמו רגליים של מיטת טורקיז)</li>
+                           <li>  במידה והלוקח מעוניין במזרן אחר יש לחשב את ההפרש בין דגם המזרן המדובר לדגם 'קלאסיק לטקס' ולהוסיף למחיר המבצע</li>
+</ul>
+                            אחריות:<br>
+                            <ul><li>3 על המנוע</li><li>6 על המנגנון</li><li>שנה אחריות על המיטה</li><li>15 שנים למזרן</li></ul>
+                           </h4>
+
                             <button type="submit" class="btn btn-primary"
                                     ng-disabled="vm.adjustablePriceGetForm.$invalid">שלח
                             </button>
+                        </formly-form>
+                    </form>
+                </div>
+            </tab>
+        </div>
+        <div ng-if="ac.fields.adminMode">
+            <tab heading="קבע מחיר מתכווננת">
+                <div class="container col-md-4 col-md-offset-4" ng-controller="AdjustablePriceSetController as vm">
+                    <form name="vm.adjustablePriceSetForm" ng-submit="vm.onSubmit()" novalidate>
+                        <h1>קבע מחיר מתכווננת</h1>
+                        <formly-form model="vm.adjustablePriceSetForm" fields="vm.adjustablePriceSetFormFields"
+                                     form="vm.adjustablePriceSetForm">
+                            <button type="submit" class="btn btn-primary"
+                                    ng-disabled="vm.adjustablePriceSetForm.$invalid">שלח
+                            </button>
+                            <br><label style="color:Green" ng-show="vm.adjustablePriceSetForm.success">!Great
+                            Success</label>
+                            <label style="color:Red" ng-show="vm.adjustablePriceSetForm.failure">Failure</label>
                         </formly-form>
                     </form>
                 </div>

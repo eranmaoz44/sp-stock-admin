@@ -15,6 +15,7 @@ from products.polyron_bed import PolyronBed
 from products.sleep_depot_bed import SleepDepotBed
 from products.youth_couch import YouthCouch
 from products.polyron_youth_couch import PolyronYouthCouch
+from products.adjustable import Adjustable
 from settings import sqlite3_db_file_path
 
 application = Flask(__name__)
@@ -208,6 +209,30 @@ def set_youth_couch_price(model):
 
     return Response(status=200)
 
+
+@application.route('/api/adjustable/<model>', methods=['GET'])
+def get_adjustable_price(model):
+    width = request.args.get('width')
+    length = request.args.get('length')
+
+    adjustable = Adjustable(model)
+
+    price = adjustable.get_price(get_db_handle(), [width, length])
+
+    return Response(status=200, response=str(price))
+
+
+@application.route('/api/adjustable/<model>', methods=['POST'])
+def set_adjustable_price(model):
+    width = request.args.get('width')
+    length = request.args.get('length')
+
+    price = request.get_json()['price']
+    adjustable = Adjustable(model)
+
+    adjustable.set_price(get_db_handle(), [width, length], price)
+
+    return Response(status=200)
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0')

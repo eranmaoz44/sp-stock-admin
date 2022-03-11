@@ -8,7 +8,7 @@
 		.module('spStockAdminApp')
 		.controller('AdjustablePriceSetController', AdjustablePriceSetController, ['$http', '$scope']);
 
-		function AdjustablePriceSetController(adjustable, width, length, $http, $scope) {
+		function AdjustablePriceSetController(adjustable, width_adj, length, $http, $scope) {
 
 			var vm = this;
 
@@ -45,7 +45,7 @@
 						label: 'רוחב',
 						// Call our province service to get a list
 						// of provinces and territories
-						options: width.getWidths(),
+						options: width_adj.getWidths(),
 						required: true
 					}
 				},

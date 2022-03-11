@@ -8,7 +8,7 @@
 		.module('spStockAdminApp')
 		.controller('AdjustablePriceGetController', AdjustablePriceGetController, ['$http', '$scope']);
 
-		function AdjustablePriceGetController(adjustable, width, length, $http, $scope) {
+		function AdjustablePriceGetController(adjustable, width_adj, length, $http, $scope) {
 
 			var vm = this;
 
@@ -37,7 +37,7 @@
 					type: 'select',
 					templateOptions: {
 						label: 'רוחב',
-						options: width.getWidths()
+						options: width_adj.getWidths()
 					}
 				},
 				{
